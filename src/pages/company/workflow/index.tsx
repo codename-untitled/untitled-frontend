@@ -1,9 +1,9 @@
-import React from 'react'
-
 const Workflow = () => {
   return (
-    <div>Workflow</div>
-  )
-}
+    <div>
+      <p>Workflow</p>
+    </div>
+  );
+};
 
-export default Workflow
+export default Workflow;
