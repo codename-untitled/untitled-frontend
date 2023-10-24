@@ -11,7 +11,7 @@ type NavbarLink = {
 const Company = () => {
   let location = useLocation();
   const routeSegments = location.pathname.split('/').filter(Boolean);
-  const [navbarCollapsed, setmnavbarCollapsed] = useState(false);
+  const [navbarCollapsed, setnavbarCollapsed] = useState(false);
 
   const navbarLinks: NavbarLink[] = [
     {
@@ -42,19 +42,32 @@ const Company = () => {
 
   return (
     <div className='flex w-full h-screen'>
-      <div className='basis-2/12 bg-black'>
+      <div
+        className={`bg-black ${navbarCollapsed ? 'basis-1/12' : 'basis-2/12'}`}
+      >
         <div className='flex flex-col items-center mt-5 gap-36 relative'>
           <img
             src={require('assets/Untitled team logo 2.svg').default}
             alt=''
             className='h-10 w-16'
           />
-          <div>
-            <img
-              src={require('assets/collpaseleft.svg').default}
-              alt=''
-              className='absolute right-0 -mt-14'
-            />
+          <div
+            className='absolute right-0 mt-20 cursor-pointer border'
+            onClick={() => setnavbarCollapsed(!navbarCollapsed)}
+          >
+            {navbarCollapsed ? (
+              <img
+                src={require('assets/uncollapse.svg').default}
+                alt=''
+                className='h-10 w-10'
+              />
+            ) : (
+              <img
+                src={require('assets/collpaseleft.svg').default}
+                alt=''
+                className='h-10 w-10'
+              />
+            )}
           </div>
           <div className='flex flex-col gap-16'>
             {navbarLinks.map(
@@ -72,16 +85,16 @@ const Company = () => {
                         <img
                           src={activeIcon}
                           alt='active icon'
-                          className='absolute -ml-10'
+                          className={`${!navbarCollapsed && 'absolute -ml-10'}`}
                         />
                       ) : (
                         <img
                           src={inactiveIcon}
                           alt='inactive icon'
-                          className='absolute -ml-10'
+                          className={`${!navbarCollapsed && 'absolute -ml-10'}`}
                         />
                       )}{' '}
-                      {name}
+                      <span>{!navbarCollapsed && name}</span>
                     </span>
                   )}
                 </NavLink>
@@ -90,7 +103,11 @@ const Company = () => {
           </div>
         </div>
       </div>
-      <div className='basis-10/12 bg-orange'>
+      <div
+        className={`bg-orange ${
+          navbarCollapsed ? 'basis-11/12' : 'basis-10/12'
+        }`}
+      >
         <div className='border-b border-black h-20 border-solid'>
           <div className='flex justify-between items-center px-10 h-full'>
             <p className='capitalize font-semibold text-2xl'>
