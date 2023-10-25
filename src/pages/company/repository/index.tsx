@@ -1,7 +1,7 @@
 const Repository = () => {
   return (
     <div>
-        <p>Repo Works!</p>
+        <p className="text-center">Repo Works!</p>
     </div>
   )
 }

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Turn as Hamburger } from 'hamburger-react';
+import MobileNavbar from 'components/company/mobileNavbar';
+import Avatar from '@mui/material/Avatar';
 
-type NavbarLink = {
+export type NavbarLink = {
   name: string;
   route: string;
   activeIcon: string;
@@ -12,6 +15,7 @@ const Company = () => {
   let location = useLocation();
   const routeSegments = location.pathname.split('/').filter(Boolean);
   const [navbarCollapsed, setnavbarCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navbarLinks: NavbarLink[] = [
     {
@@ -43,7 +47,9 @@ const Company = () => {
   return (
     <div className='flex w-full h-screen'>
       <div
-        className={`bg-black ${navbarCollapsed ? 'basis-1/12' : 'basis-2/12'}`}
+        className={`bg-black ${
+          navbarCollapsed ? 'basis-1/12' : 'basis-2/12'
+        } max-lg:hidden`}
       >
         <div className='flex flex-col items-center mt-5 gap-36 relative'>
           <img
@@ -106,18 +112,38 @@ const Company = () => {
       <div
         className={`bg-orange ${
           navbarCollapsed ? 'basis-11/12' : 'basis-10/12'
-        }`}
+        } max-lg:basis-full`}
       >
         <div className='border-b border-black h-20 border-solid'>
-          <div className='flex justify-between items-center px-10 h-full'>
-            <p className='capitalize font-semibold text-2xl'>
-              {routeSegments[1] ?? 'Analytics'}
-            </p>
-            <p>Somethings here</p>
+          <div className='flex justify-between items-center px-10 h-full max-lg:px-0 max-lg:pr-10 max-lg:items-stretch max-md:pr-5'>
+            <div className='flex items-center gap-4'>
+              <div className='h-full bg-black flex items-center pl-4 w-20 cursor-pointer lg:hidden'>
+                <Hamburger
+                  color='#ffff'
+                  size={28}
+                  toggled={isOpen}
+                  toggle={setIsOpen}
+                />
+              </div>
+              <p className='capitalize font-semibold text-2xl max-sm:text-base'>
+                {routeSegments[1] ?? 'Analytics'}
+              </p>
+            </div>
+            <div className='mt-2 flex gap-2 items-center'>
+              <Avatar />
+              <p className='text-sm max-sm:hidden'>Untitled Company</p>
+              <img
+                src={require('assets/arrow-down.svg').default}
+                alt='arrow-down-icon'
+              />
+            </div>
           </div>
         </div>
         <Outlet />
       </div>
+      {isOpen && (
+        <MobileNavbar navbarLinks={navbarLinks} setIsOpen={setIsOpen} />
+      )}
     </div>
   );
 };

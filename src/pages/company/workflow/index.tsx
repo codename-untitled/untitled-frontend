@@ -1,7 +1,7 @@
 const Workflow = () => {
   return (
     <div>
-      <p>Workflow</p>
+      <p className='text-center'>Workflow</p>
     </div>
   );
 };
