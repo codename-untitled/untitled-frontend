@@ -14,8 +14,8 @@ export type NavbarLink = {
 const Company = () => {
   let location = useLocation();
   const routeSegments = location.pathname.split('/').filter(Boolean);
-  const [navbarCollapsed, setnavbarCollapsed] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [navbarCollapsed, setnavbarCollapsed] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navbarLinks: NavbarLink[] = [
     {
