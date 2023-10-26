@@ -14,7 +14,7 @@ export type NavbarLink = {
 const Company = () => {
   let location = useLocation();
   const routeSegments = location.pathname.split('/').filter(Boolean);
-  const [navbarCollapsed, setnavbarCollapsed] = useState<boolean>(false);
+  const [isNavbarCollapsed, setIsNavbarCollapsed] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navbarLinks: NavbarLink[] = [
@@ -48,7 +48,7 @@ const Company = () => {
     <div className='flex w-full h-screen'>
       <div
         className={`bg-black ${
-          navbarCollapsed ? 'basis-1/12' : 'basis-2/12'
+          isNavbarCollapsed ? 'basis-1/12' : 'basis-2/12'
         } max-lg:hidden`}
       >
         <div className='flex flex-col items-center mt-5 gap-36 relative'>
@@ -59,9 +59,9 @@ const Company = () => {
           />
           <div
             className='absolute right-0 mt-20 cursor-pointer border'
-            onClick={() => setnavbarCollapsed(!navbarCollapsed)}
+            onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)}
           >
-            {navbarCollapsed ? (
+            {isNavbarCollapsed ? (
               <img
                 src={require('assets/uncollapse.svg').default}
                 alt=''
@@ -91,16 +91,20 @@ const Company = () => {
                         <img
                           src={activeIcon}
                           alt='active icon'
-                          className={`${!navbarCollapsed && 'absolute -ml-10'}`}
+                          className={`${
+                            !isNavbarCollapsed && 'absolute -ml-10'
+                          }`}
                         />
                       ) : (
                         <img
                           src={inactiveIcon}
                           alt='inactive icon'
-                          className={`${!navbarCollapsed && 'absolute -ml-10'}`}
+                          className={`${
+                            !isNavbarCollapsed && 'absolute -ml-10'
+                          }`}
                         />
                       )}{' '}
-                      <span>{!navbarCollapsed && name}</span>
+                      <span>{!isNavbarCollapsed && name}</span>
                     </span>
                   )}
                 </NavLink>
@@ -111,7 +115,7 @@ const Company = () => {
       </div>
       <div
         className={`bg-orange ${
-          navbarCollapsed ? 'basis-11/12' : 'basis-10/12'
+          isNavbarCollapsed ? 'basis-11/12' : 'basis-10/12'
         } max-lg:basis-full`}
       >
         <div className='border-b border-black h-20 border-solid'>
