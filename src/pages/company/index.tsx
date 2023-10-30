@@ -13,14 +13,14 @@ export type NavbarLink = {
 
 const Company = () => {
   let location = useLocation();
-  const routeSegments = location.pathname.split('/').filter(Boolean);
+  const routeSegments = location.pathname.split('/').filter(Boolean); //Used to get the first route after the slash
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navbarLinks: NavbarLink[] = [
     {
       name: 'Analytics',
-      route: '/company/',
+      route: '/company',
       activeIcon: require('assets/analyticsicon.svg').default,
       inactiveIcon: require('assets/inactiveanalytic.svg').default,
     },
