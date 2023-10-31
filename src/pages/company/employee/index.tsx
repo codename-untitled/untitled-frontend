@@ -1,7 +1,7 @@
 const CompanyEmployee = () => {
   return (
     <div>
-      <p className='text-center'>Company employee!</p>
+      <p className='text-center'>Company employee</p>
     </div>
   );
 };
