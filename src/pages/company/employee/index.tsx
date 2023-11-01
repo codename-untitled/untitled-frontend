@@ -1,5 +1,5 @@
-import AddButton from 'components/company/buttons/addButton';
-import FilterButton from 'components/company/buttons/filterButton';
+import AddButton from 'modules/company/components/buttons/addButton';
+import FilterButton from 'modules/company/components/buttons/filterButton';
 import EmployeeTable from 'components/company/employeeTable';
 import EmptyState from 'components/company/emptyState';
 import { employees } from 'mockdata/employees';
