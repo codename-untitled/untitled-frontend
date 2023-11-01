@@ -13,7 +13,7 @@ export type NavbarLink = {
 
 const Company = () => {
   let location = useLocation();
-  const routeSegments = location.pathname.split('/').filter(Boolean); //Used to get the first route after the slash
+  const routeSegments = location.pathname.split('/').filter(Boolean); //Used to get all routes after the slash
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -78,7 +78,7 @@ const Company = () => {
           <div className='flex flex-col gap-16'>
             {navbarLinks.map(
               ({ name, route, activeIcon, inactiveIcon }, index) => (
-                <NavLink to={route} key={index}>
+                <NavLink to={route} key={index} end={route === '/company'}>
                   {({ isActive }) => (
                     <span
                       className={
