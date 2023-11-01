@@ -1,8 +1,8 @@
 import AddButton from 'modules/company/components/buttons/addButton';
 import FilterButton from 'modules/company/components/buttons/filterButton';
-import EmployeeTable from 'components/company/employeeTable';
-import EmptyState from 'components/company/emptyState';
 import { employees } from 'mockdata/employees';
+import EmptyState from 'modules/company/components/emptyState';
+import EmployeeTable from 'modules/company/components/employeeTable';
 
 const CompanyEmployee = () => {
   return (

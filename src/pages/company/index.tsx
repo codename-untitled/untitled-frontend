@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Turn as Hamburger } from 'hamburger-react';
-import MobileNavbar from 'components/company/mobileNavbar';
 import Avatar from '@mui/material/Avatar';
+import MobileNavbar from 'modules/company/components/mobileNavbar';
 
 export type NavbarLink = {
   name: string;
