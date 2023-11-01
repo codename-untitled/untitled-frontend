@@ -13,7 +13,7 @@ export type NavbarLink = {
 
 const Company = () => {
   let location = useLocation();
-  const routeSegments = location.pathname.split('/').filter(Boolean); //Used to get all routes after the slash
+  const routeSegments = location.pathname.split('/').filter(Boolean); //Used to get all routes after the slash as an array
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
