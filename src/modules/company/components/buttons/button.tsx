@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-type Props = {
+type ButtonProps = {
   label: string;
   onClick?: () => void;
   icon?: string;
@@ -15,7 +15,7 @@ function Button({
   color = 'purple',
   size = 'md',
   type = 'button',
-}: Props) {
+}: ButtonProps) {
   return (
     <button
       onClick={onClick}

@@ -58,7 +58,7 @@ const Company = () => {
             className="h-10 w-16"
           />
           <button
-            className="absolute right-0 mt-20 cursor-pointer border"
+            className="absolute right-0 mt-20 cursor-pointer"
             onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)}
             type="button"
           >
