@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 type MobileNavbarProps = {
   navbarLinks: NavbarLink[];
+  isOpen?: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -13,7 +14,11 @@ type NavbarLink = {
   inactiveIcon: string;
 };
 
-const MobileNavbar = ({ navbarLinks, setIsOpen }: MobileNavbarProps) => {
+const MobileNavbar = ({
+  navbarLinks,
+  setIsOpen,
+  isOpen,
+}: MobileNavbarProps) => {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,7 +34,11 @@ const MobileNavbar = ({ navbarLinks, setIsOpen }: MobileNavbarProps) => {
   });
 
   return (
-    <div className="m-0 p-0 w-screen h-full min-h-screen bg-offBlack fixed top-0 left-0">
+    <div
+      className={`m-0 p-0 w-screen h-full min-h-screen bg-offBlack fixed top-0 left-0  ${
+        !isOpen && 'hidden'
+      }`}
+    >
       <div
         className="m-0 p-0 bg-black w-56 fixed left-0 top-0 h-full min-h-screen z-50"
         ref={container}
