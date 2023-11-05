@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { employees } from 'mockdata/employees';
+import employees from 'mockdata/employees';
 import EmptyState from 'modules/company/components/emptyState';
 import EmployeeTable from 'modules/company/components/employeeTable';
 import AddEmployeeModal from 'modules/company/components/modals/addEmployeeModal';
