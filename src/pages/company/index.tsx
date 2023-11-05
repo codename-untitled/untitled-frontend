@@ -114,7 +114,7 @@ const Company = () => {
         } max-lg:basis-full`}
       >
         <div className="border-b border-black h-20 border-solid">
-          <div className="flex justify-between items-center px-10 h-full max-lg:px-0 max-lg:pr-10 max-lg:items-stretch max-md:pr-5">
+          <div className="flex justify-between items-center px-[5%] h-full max-lg:px-0 max-lg:pr-[5%] max-lg:items-stretch max-md:pr-[5%]">
             <div className="flex items-center gap-4">
               <div className="h-full bg-black flex items-center pl-4 w-20 cursor-pointer lg:hidden">
                 <Hamburger
@@ -140,9 +140,11 @@ const Company = () => {
         </div>
         <Outlet />
       </div>
-      {isOpen && (
-        <MobileNavbar navbarLinks={navbarLinks} setIsOpen={setIsOpen} />
-      )}
+      <MobileNavbar
+        navbarLinks={navbarLinks}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
     </div>
   );
 };
