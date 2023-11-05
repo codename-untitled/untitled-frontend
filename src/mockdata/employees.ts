@@ -1,11 +1,11 @@
-export const employees = [
+const employees = [
   {
     firstName: 'Uche',
     lastName: 'Omodu',
     email: 'chivoomodu@gmail.com',
     role: 'Software developer',
     department: 'ICT',
-    progress: '50',
+    progress: '50%',
   },
   {
     firstName: 'John',
@@ -13,7 +13,7 @@ export const employees = [
     email: 'johndoe@example.com',
     role: 'Product Manager',
     department: 'Product Management',
-    progress: '60',
+    progress: '60%',
   },
   {
     firstName: 'Alice',
@@ -21,7 +21,7 @@ export const employees = [
     email: 'alicesmith@example.com',
     role: 'UI/UX Designer',
     department: 'Design',
-    progress: '45',
+    progress: '45%',
   },
   {
     firstName: 'Michael',
@@ -29,7 +29,7 @@ export const employees = [
     email: 'michaeljohnson@example.com',
     role: 'QA Engineer',
     department: 'Quality Assurance',
-    progress: '70',
+    progress: '70%',
   },
   {
     firstName: 'Emily',
@@ -37,7 +37,7 @@ export const employees = [
     email: 'emilybrown@example.com',
     role: 'Marketing Specialist',
     department: 'Marketing',
-    progress: '55',
+    progress: '55%',
   },
   {
     firstName: 'David',
@@ -45,7 +45,7 @@ export const employees = [
     email: 'davidlee@example.com',
     role: 'Data Analyst',
     department: 'Analytics',
-    progress: '40',
+    progress: '40%',
   },
   {
     firstName: 'Sarah',
@@ -53,7 +53,7 @@ export const employees = [
     email: 'sarahmiller@example.com',
     role: 'HR Manager',
     department: 'Human Resources',
-    progress: '75',
+    progress: '75%',
   },
   {
     firstName: 'Robert',
@@ -61,7 +61,7 @@ export const employees = [
     email: 'roberttaylor@example.com',
     role: 'Sales Representative',
     department: 'Sales',
-    progress: '65',
+    progress: '65%',
   },
   {
     firstName: 'Linda',
@@ -69,7 +69,7 @@ export const employees = [
     email: 'lindawilson@example.com',
     role: 'Financial Analyst',
     department: 'Finance',
-    progress: '30',
+    progress: '30%',
   },
   {
     firstName: 'William',
@@ -77,6 +77,8 @@ export const employees = [
     email: 'williamanderson@example.com',
     role: 'System Administrator',
     department: 'IT',
-    progress: '80',
+    progress: '80%',
   },
 ];
+
+export default employees;

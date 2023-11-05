@@ -1,9 +1,7 @@
-const Workflow = () => {
-  return (
-    <div>
-      <p className='text-center'>Workflow</p>
-    </div>
-  );
-};
+const Workflow = () => (
+  <div>
+    <p className="text-center">Workflow</p>
+  </div>
+);
 
 export default Workflow;

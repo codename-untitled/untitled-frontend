@@ -11,16 +11,16 @@ function App() {
   return (
     <ScrollToTop>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/company' element={<Company />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/company" element={<Company />}>
           <Route index element={<Analytics />} />
-          <Route path='repository' element={<Repository />} />
-          <Route path='employee' element={<CompanyEmployees />} />
-          <Route path='workflow' element={<Workflow />} />
+          <Route path="repository" element={<Repository />} />
+          <Route path="employee" element={<CompanyEmployees />} />
+          <Route path="workflow" element={<Workflow />} />
         </Route>
         <Route
           path={'/*'}
-          element={<h1 className='text-center mt-4'>404: Not Found</h1>}
+          element={<h1 className="text-center mt-4">404: Not Found</h1>}
         />
       </Routes>
     </ScrollToTop>

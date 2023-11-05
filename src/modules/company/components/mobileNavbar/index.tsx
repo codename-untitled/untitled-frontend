@@ -1,10 +1,16 @@
-import { NavbarLink } from 'pages/company';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type MobileNavbarProps = {
   navbarLinks: NavbarLink[];
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+type NavbarLink = {
+  name: string;
+  route: string;
+  activeIcon: string;
+  inactiveIcon: string;
 };
 
 const MobileNavbar = ({ navbarLinks, setIsOpen }: MobileNavbarProps) => {
@@ -23,52 +29,46 @@ const MobileNavbar = ({ navbarLinks, setIsOpen }: MobileNavbarProps) => {
   });
 
   return (
-    <div className='m-0 p-0 w-screen h-full min-h-screen bg-offBlack fixed top-0 left-0'>
+    <div className="m-0 p-0 w-screen h-full min-h-screen bg-offBlack fixed top-0 left-0">
       <div
-        className='m-0 p-0 bg-black w-56 fixed left-0 top-0 h-full min-h-screen z-50'
+        className="m-0 p-0 bg-black w-56 fixed left-0 top-0 h-full min-h-screen z-50"
         ref={container}
       >
-        <div className='flex flex-col items-center mt-5 gap-36 relative'>
+        <div className="flex flex-col items-center mt-5 gap-36 relative">
           <img
             src={require('assets/Untitled team logo 2.svg').default}
-            alt=''
-            className='h-10 w-16'
+            alt=""
+            className="h-10 w-16"
           />
-          <div className='flex flex-col gap-16'>
-            {navbarLinks.map(
-              ({ name, route, activeIcon, inactiveIcon }, index) => (
-                <NavLink
-                  to={route}
-                  key={index}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {({ isActive }) => (
-                    <span
-                      className={
-                        isActive
-                          ? 'text-white flex gap-2 relative'
-                          : 'text-grey flex gap-2 relative'
-                      }
-                    >
-                      {isActive ? (
-                        <img
-                          src={activeIcon}
-                          alt='active icon'
-                          className={'absolute -ml-10'}
-                        />
-                      ) : (
-                        <img
-                          src={inactiveIcon}
-                          alt='inactive icon'
-                          className={'absolute -ml-10'}
-                        />
-                      )}{' '}
-                      <span>{name}</span>
-                    </span>
-                  )}
-                </NavLink>
-              )
-            )}
+          <div className="flex flex-col gap-16">
+            {navbarLinks.map(({ name, route, activeIcon, inactiveIcon }) => (
+              <NavLink to={route} key={route} onClick={() => setIsOpen(false)}>
+                {({ isActive }) => (
+                  <span
+                    className={
+                      isActive
+                        ? 'text-white flex gap-2 relative'
+                        : 'text-grey flex gap-2 relative'
+                    }
+                  >
+                    {isActive ? (
+                      <img
+                        src={activeIcon}
+                        alt="active icon"
+                        className="absolute -ml-10"
+                      />
+                    ) : (
+                      <img
+                        src={inactiveIcon}
+                        alt="inactive icon"
+                        className="absolute -ml-10"
+                      />
+                    )}{' '}
+                    <span>{name}</span>
+                  </span>
+                )}
+              </NavLink>
+            ))}
           </div>
         </div>
       </div>
