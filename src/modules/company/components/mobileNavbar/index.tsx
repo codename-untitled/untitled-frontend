@@ -51,7 +51,12 @@ const MobileNavbar = ({
           />
           <div className="flex flex-col gap-16">
             {navbarLinks.map(({ name, route, activeIcon, inactiveIcon }) => (
-              <NavLink to={route} key={route} onClick={() => setIsOpen(false)}>
+              <NavLink
+                to={route}
+                key={route}
+                onClick={() => setIsOpen(false)}
+                end={route === '/company'}
+              >
                 {({ isActive }) => (
                   <span
                     className={
