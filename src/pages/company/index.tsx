@@ -45,7 +45,7 @@ const Company = () => {
   ];
 
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full min-h-screen h-[100%]">
       <div
         className={`bg-black ${
           isNavbarCollapsed ? 'basis-1/12' : 'basis-2/12'
@@ -109,7 +109,7 @@ const Company = () => {
         </div>
       </div>
       <div
-        className={`bg-orange ${
+        className={`bg-orange pb-5 ${
           isNavbarCollapsed ? 'basis-11/12' : 'basis-10/12'
         } max-lg:basis-full`}
       >
