@@ -21,11 +21,11 @@ const CompanyEmployees = () => {
         />
         <Button
           label="+ Add Employee"
-          size="lg"
+          size="md"
           onClick={() => setOpenAddEmployeeModal(true)}
         />
       </div>
-      <div className="mt-[30px] rounded-md bg-white h-[100%] min-h-[550px] shadow-[1px_1px_0px_0px_#000] border-solid border">
+      <div className="mt-[30px] rounded-md bg-white h-[600px] shadow-[1px_1px_0px_0px_#000] border-solid border">
         {employees.length === 0 ? (
           <EmptyState placeholder="No employee found" />
         ) : (

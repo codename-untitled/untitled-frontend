@@ -4,7 +4,7 @@ type ButtonProps = {
   onClick?: () => void;
   icon?: string;
   color?: 'purple' | 'white';
-  size?: 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit';
 };
 
@@ -13,7 +13,7 @@ function Button({
   onClick,
   icon,
   color = 'purple',
-  size = 'md',
+  size = 'sm',
   type = 'button',
 }: ButtonProps) {
   return (
@@ -23,8 +23,8 @@ function Button({
         color === 'purple' && 'bg-chartPurple text-white'
       } 
       ${color === 'white' && 'bg-white text-black'}
-      ${size === 'md' && ' w-[92px]'}
-      ${size === 'lg' && ' w-[163px]'} 
+      ${size === 'sm' && ' w-[92px]'}
+      ${size === 'md' && ' w-[163px]'} 
       h-[38px] font-light flex gap-2 justify-center items-center`}
       type={type}
     >
