@@ -6,6 +6,7 @@ import Analytics from 'pages/company/analytics';
 import CompanyEmployees from 'pages/company/employees';
 import Repository from 'pages/company/repository';
 import Workflow from 'pages/company/workflow';
+import CreateWorkflow from 'pages/company/workflow/create';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="repository" element={<Repository />} />
           <Route path="employee" element={<CompanyEmployees />} />
           <Route path="workflow" element={<Workflow />} />
+          <Route path="workflow/create" element={<CreateWorkflow />} />
         </Route>
         <Route
           path={'/*'}
