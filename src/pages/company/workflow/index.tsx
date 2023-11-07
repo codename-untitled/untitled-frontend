@@ -1,5 +1,5 @@
 import workflowTemplates from 'mockdata/workflow';
-import Button from 'modules/company/components/buttons/button';
+import Button from 'modules/general/components/buttons/button';
 import EmptyState from 'modules/company/components/emptyState';
 import TemplateList from 'modules/company/components/templateList';
 import { useNavigate } from 'react-router-dom';

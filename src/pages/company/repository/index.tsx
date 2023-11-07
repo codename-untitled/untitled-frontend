@@ -1,5 +1,5 @@
 import repositoryFiles from 'mockdata/repository';
-import Button from 'modules/company/components/buttons/button';
+import Button from 'modules/general/components/buttons/button';
 import EmptyState from 'modules/company/components/emptyState';
 import RepositoryList from 'modules/company/components/repositoryList';
 

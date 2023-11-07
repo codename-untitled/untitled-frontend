@@ -1,4 +1,4 @@
-import Button from '../buttons/button';
+import Button from '../../../general/components/buttons/button';
 import FormField from '../formField';
 import ModalBase from './modalBase';
 import { ModalProps } from './types';

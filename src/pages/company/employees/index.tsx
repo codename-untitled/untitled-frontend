@@ -3,7 +3,7 @@ import employees from 'mockdata/employees';
 import EmptyState from 'modules/company/components/emptyState';
 import EmployeeTable from 'modules/company/components/employeeTable';
 import AddEmployeeModal from 'modules/company/components/modals/addEmployeeModal';
-import Button from 'modules/company/components/buttons/button';
+import Button from 'modules/general/components/buttons/button';
 
 const CompanyEmployees = () => {
   const [openAddEmployeeModal, setOpenAddEmployeeModal] = useState(false);
