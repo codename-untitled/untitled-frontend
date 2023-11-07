@@ -12,6 +12,8 @@ module.exports = {
       grey: '#AEAEAE',
       offBlack: '#000000b3',
       chartPurple: '#9923AC',
+      offWhite: '#FAF9F6',
+      chartBlue: '#1EC1CB'
     },
   },
   plugins: [],
