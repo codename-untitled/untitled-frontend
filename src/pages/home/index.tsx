@@ -5,7 +5,7 @@ const Home = () => (
   <div className="min-h-screen h-[100%] bg-offWhite">
     <Header />
     <div className="flex w-[100%]">
-      <div className="basis-[50%]">
+      <div className="basis-[50%] ml-[5%]">
         <p className="text-black text-[68px] font-extrabold max-w-[583px] mt-[100px]">
           The <span className="underline text-chartBlue">Ultimate</span> HR
           software for new hires.
@@ -15,7 +15,7 @@ const Home = () => (
           <br />
           onboarding programs for any role or department.
         </p>
-        <Button label="Get started" />
+        <Button label="Get started" className="w-[186px] h-[60px] mt-10" />
       </div>
       <div className="basis-[50%]" />
     </div>
