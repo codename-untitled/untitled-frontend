@@ -7,12 +7,14 @@ import CompanyEmployees from 'pages/company/employees';
 import Repository from 'pages/company/repository';
 import Workflow from 'pages/company/workflow';
 import CreateWorkflow from 'pages/company/workflow/create';
+import SignUp from 'pages/signup';
 
 function App() {
   return (
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/company" element={<Company />}>
           <Route index element={<Analytics />} />
           <Route path="repository" element={<Repository />} />
