@@ -26,7 +26,8 @@ function Button({
       } 
       ${color === 'white' && 'bg-white text-black'}
       ${size === 'sm' && ' w-[92px]'}
-      ${size === 'md' && ' w-[163px]'} 
+      ${size === 'md' && ' w-[163px]'}
+      ${size === 'lg' && ' w-[440px]'} 
       h-[38px] font-light flex gap-2 justify-center items-center ${className}`}
       type={type}
     >
