@@ -1,8 +1,9 @@
 import Button from 'modules/general/components/buttons/button';
 import Header from 'modules/general/components/header';
+import Footer from 'modules/general/components/footer';
 
 const Home = () => (
-  <div className="min-h-screen h-[100%] bg-offWhite">
+  <div className="min-h-screen bg-offWhite grid grid-rows-[max-content,1fr,max-content]">
     <Header />
     <div className="flex w-[100%]">
       <div className="basis-[50%] ml-[5%]">
@@ -19,6 +20,7 @@ const Home = () => (
       </div>
       <div className="basis-[50%]" />
     </div>
+    <Footer />
   </div>
 );
 
