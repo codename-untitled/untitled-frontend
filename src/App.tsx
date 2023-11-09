@@ -8,6 +8,8 @@ import Repository from 'pages/company/repository';
 import Workflow from 'pages/company/workflow';
 import CreateWorkflow from 'pages/company/workflow/create';
 import SignUp from 'pages/signup';
+import SignIn from 'pages/signin';
+import CompanyAuth from 'modules/general/components/companyAuth';
 
 function App() {
   return (
@@ -15,12 +17,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/company" element={<Company />}>
-          <Route index element={<Analytics />} />
-          <Route path="repository" element={<Repository />} />
-          <Route path="employee" element={<CompanyEmployees />} />
-          <Route path="workflow" element={<Workflow />} />
-          <Route path="workflow/create" element={<CreateWorkflow />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route element={<CompanyAuth />}>
+          <Route path="/company" element={<Company />}>
+            <Route index element={<Analytics />} />
+            <Route path="repository" element={<Repository />} />
+            <Route path="employee" element={<CompanyEmployees />} />
+            <Route path="workflow" element={<Workflow />} />
+            <Route path="workflow/create" element={<CreateWorkflow />} />
+          </Route>
         </Route>
         <Route
           path={'/*'}
