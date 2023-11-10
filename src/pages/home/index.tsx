@@ -9,22 +9,25 @@ const keyPoints = ['MONITOR', 'INTERACT', 'ONBOARD', 'ASSIGN'];
 const Home = () => (
   <div className="min-h-screen bg-offWhite grid grid-rows-[max-content,1fr,max-content]">
     <Header />
-    <div className="grid grid-cols-2 gap-x-10">
-      <div className="pt-[6%] grid grid-rows-[max-content,1fr,max-content]">
+    <div className="grid lg:grid-cols-[1fr,max-content] xl:grid-cols-[42%,1fr] gap-x-10">
+      <div className="pt-[6%] grid grid-rows-[max-content,1fr,max-content] items-center">
         <img src={starImage} alt="star icon" className="ml-[5vw]" />
-        <div className="ml-[5vw] pt-[12.4%]">
-          <h1 className="text-7xl leading-[1.1] font-extrabold text-black">
+        <div className="lg:ml-[5vw] max-lg:p-[7%] pt-[12.4%] max-lg:text-center max-w-[800px] max-lg:mx-auto">
+          <h1 className="text-5xl md:text-6xl xl:text-7xl leading-[1.1] font-extrabold text-black">
             <span>The </span>
             <span className="text-chartBlue underline">Ultimate</span>
             <span> HR software for new hires.</span>
           </h1>
-          <p className="text-base font-normal my-8">
+          <p className="text-base font-normal max-sm:my-12 my-8 lg:max-w-[500px]">
             Onboarder is easy to use, flexible, and scalable. You can create
             onboarding programs for any role or department.
           </p>
-          <Button label="Get started" className="px-8 py-4 h-max w-max" />
+          <Button
+            label="Get started"
+            className="px-8 py-4 h-max w-max max-lg:mx-auto"
+          />
         </div>
-        <div className="self-end relative">
+        <div className="self-end relative hidden lg:block">
           <img
             src={require('assets/big-blue-star.svg').default}
             alt="star icon"
@@ -41,11 +44,12 @@ const Home = () => (
           </div>
         </div>
       </div>
-      <div className="self-center justify-self-center">
-        <div className="w-max relative z-10 before:absolute before:-z-10 before:inset-0 before:m-auto before:w-[95%] before:pt-[95%] before:border before:border-dashed before:border-chartPurple before:rounded-full after:absolute after:-z-10 after:top-0 after:-left-[5%] after:bottom-0 after:m-auto after:w-[110%] after:pt-[110%] after:border after:border-dashed after:border-chartPurple after:rounded-full">
+      <div className="self-center justify-self-center w-3/4 xl:w-4/5 max-lg:my-[calc(64px+10vw)] max-lg:max-w-[500px] lg:flex lg:justify-center">
+        <div className="w-full lg:w-max relative z-10 before:absolute before:-z-10 before:inset-0 before:m-auto before:w-[95%] before:pt-[95%] before:border before:border-dashed before:border-chartPurple before:rounded-full after:absolute after:-z-10 after:top-0 after:-left-[5%] after:bottom-0 after:m-auto after:w-[110%] after:pt-[110%] after:border after:border-dashed after:border-chartPurple after:rounded-full">
           <img
             src={require('assets/images/analytics-screenshot.png')}
             alt="onboarder analytics page"
+            className="w-full h-auto object-cover"
           />
           <img
             src={require('assets/regular-orange-star.svg').default}
