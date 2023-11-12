@@ -10,14 +10,17 @@ import CreateWorkflow from 'pages/company/workflow/create';
 import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
+import NoAuth from 'modules/general/components/noAuth';
 
 function App() {
   return (
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route element={<NoAuth />}>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Route>
         <Route element={<CompanyAuth />}>
           <Route path="/company" element={<Company />}>
             <Route index element={<Analytics />} />
