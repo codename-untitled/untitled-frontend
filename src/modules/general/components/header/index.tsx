@@ -12,12 +12,12 @@ const Header = () => {
           label="Login"
           onClick={() => navigate('/login')}
           color="white"
-          className="w-[140px] h-[48px]"
+          className="w-[141px] h-[48px]"
         />
         <Button
           label="Sign up"
           onClick={() => navigate('/signup')}
-          className="w-[140px] h-[48px]"
+          className="w-[141px] h-[48px]"
         />
       </div>
     </div>
