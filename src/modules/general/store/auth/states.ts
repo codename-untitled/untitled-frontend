@@ -8,6 +8,7 @@ export const companySessionAtom = atom<CompanySession | null>({
   industry: '',
   email: '',
   taxId: '',
+  token: '',
   isAuthenticated: false,
 });
 

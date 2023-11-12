@@ -5,6 +5,7 @@ export type CompanySession = {
   industry: string;
   email: string;
   taxId: string;
+  token: string;
   isAuthenticated: boolean;
 };
 
@@ -19,4 +20,23 @@ export type EmployeeSession = {
   phoneNumber: string;
   address: string;
   isAuthenticated: boolean;
+};
+
+export type CompanyResponse = {
+  company: CompanySession;
+  token: string;
+};
+
+export type CompanySignUpPayload = {
+  name: string;
+  address: string;
+  industry: string;
+  email: string;
+  taxId: string;
+  password: string;
+};
+
+export type SignInPayload = {
+  email: string;
+  password: string;
 };

@@ -1,9 +1,46 @@
+/* eslint-disable no-underscore-dangle */
+import { Formik } from 'formik';
+import { FormikStateContextError } from 'helpers/context-error';
+import { useCompanySession } from 'hooks/useCompanySession';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formField';
+import {
+  CompanyResponse,
+  CompanySession,
+  SignInPayload,
+} from 'modules/general/store/auth';
+import { useCompanySignInMutation } from 'modules/general/store/auth/mutations';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { schema } from './validation';
 
 const SignIn = () => {
   const year = new Date().getFullYear();
+  const session = useCompanySession();
+
+  const mutation = useCompanySignInMutation({
+    onSuccess: (response: CompanyResponse) => {
+      toast.success('Success');
+
+      const companyData: CompanySession = {
+        id: response.company.id,
+        name: response.company.name,
+        address: response.company.address,
+        email: response.company.email,
+        industry: response.company.industry,
+        taxId: response.company.taxId,
+        token: response.token,
+        isAuthenticated: true,
+      };
+
+      session.setData(companyData);
+      session.authorize(response.token);
+    },
+  });
+
+  const onSubmit = (data: SignInPayload) => {
+    mutation.mutate(data);
+  };
 
   return (
     <div className="min-h-screen h-[100%] flex bg-offWhite max-lg:bg-purp max-lg:bg-cover max-[375px]:min-h-full">
@@ -19,29 +56,74 @@ const SignIn = () => {
             <p className="text-center text-[14px] mt-[5px]">
               Sign in to continue
             </p>
-            <form className="mt-[35px]">
-              <div className="flex flex-col w-[100%] gap-[30px] mt-[20px]">
-                <FormField label="Email address" />
-                <div className="basis-[50%] flex flex-col gap-2">
-                  <FormField label="Password" type="password" />
-                  <p className="flex justify-end text-chartPurple cursor-pointer text-[12px]">
-                    Forgot password?
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center items-center flex-col mt-[30px]">
-                <Button label="Sign in" className="h-[42px] w-full" />
-                <p className="text-[12px] mt-4">
-                  Already have an account?{' '}
-                  <Link
-                    className="text-chartPurple cursor-pointer"
-                    to="/signup"
-                  >
-                    Sign up
-                  </Link>
-                </p>
-              </div>
-            </form>
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+              }}
+              validationSchema={schema}
+              onSubmit={onSubmit}
+            >
+              {({
+                errors,
+                touched,
+                values,
+                isSubmitting,
+                handleChange,
+                setFieldTouched,
+                handleSubmit,
+              }) => (
+                <form className="mt-[35px]" onSubmit={handleSubmit}>
+                  <div className="flex flex-col w-[100%] gap-[30px] mt-[20px]">
+                    <FormField
+                      label="Email address"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={() => setFieldTouched('email')}
+                      errors={errors.email}
+                      touched={touched.email}
+                    />
+                    <div className="basis-[50%] flex flex-col gap-2">
+                      <FormField
+                        label="Password"
+                        type="password"
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={() => setFieldTouched('password')}
+                        errors={errors.password}
+                        touched={touched.password}
+                      />
+                      <p className="flex justify-end text-chartPurple cursor-pointer text-[12px]">
+                        Forgot password?
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center flex-col mt-[30px]">
+                    <Button
+                      label="Sign in"
+                      className="h-[42px] w-full"
+                      type="submit"
+                      isLoading={isSubmitting}
+                    />
+                    <p className="text-[12px] mt-4">
+                      Already have an account?{' '}
+                      <Link
+                        className="text-chartPurple cursor-pointer"
+                        to="/signup"
+                      >
+                        Sign up
+                      </Link>
+                    </p>
+                  </div>
+                  <FormikStateContextError
+                    mutation={mutation}
+                    toasterId="sign-in-toast"
+                  />
+                </form>
+              )}
+            </Formik>
           </div>
           <img
             src={require('assets/purple star.svg').default}
