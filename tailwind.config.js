@@ -13,7 +13,8 @@ module.exports = {
       offBlack: '#000000b3',
       chartPurple: '#9923AC',
       offWhite: '#FAF9F6',
-      chartBlue: '#1EC1CB'
+      chartBlue: '#1EC1CB',
+      navBlack: '#121212'
     },
   },
   plugins: [],
