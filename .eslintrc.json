@@ -51,6 +51,7 @@
     "react/jsx-one-expression-per-line": "off",
     "object-curly-newline": "off",
     "react/jsx-indent-props": ["error", "first"],
+    "import/no-extraneous-dependencies": "off",
     "prettier/prettier": [
       "error",
       {
@@ -60,9 +61,9 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/forbid-prop-types": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "implicit-arrow-linebreak": "off",
     "singleQuote": 0,
-    // defaultProps rule to be deprecated on function components
-    // https://github.com/reactjs/rfcs/pull/107
     "import/prefer-default-export": [0, {}],
     "react/require-default-props": [
       0,

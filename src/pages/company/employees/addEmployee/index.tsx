@@ -1,9 +1,9 @@
-import Button from '../../../general/components/buttons/button';
-import FormField from '../formField';
-import ModalBase from './modalBase';
-import { ModalProps } from './types';
+import ModalBase from 'modules/company/components/modals/modalBase';
+import { ModalProps } from 'modules/company/components/modals/types';
+import Button from 'modules/general/components/buttons/button';
+import FormField from 'modules/general/components/formField';
 
-const AddEmployeeModal = ({ show, setShow }: ModalProps) => (
+const AddEmployee = ({ show, setShow }: ModalProps) => (
   <ModalBase
     modalLabel="Add Employee"
     show={show}
@@ -45,4 +45,4 @@ const AddEmployeeModal = ({ show, setShow }: ModalProps) => (
   </ModalBase>
 );
 
-export default AddEmployeeModal;
+export default AddEmployee;

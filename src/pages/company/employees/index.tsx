@@ -2,14 +2,14 @@ import { useState } from 'react';
 import employees from 'mockdata/employees';
 import EmptyState from 'modules/company/components/emptyState';
 import EmployeeTable from 'modules/company/components/employeeTable';
-import AddEmployeeModal from 'modules/company/components/modals/addEmployeeModal';
 import Button from 'modules/general/components/buttons/button';
+import AddEmployee from './addEmployee';
 
 const CompanyEmployees = () => {
   const [openAddEmployeeModal, setOpenAddEmployeeModal] = useState(false);
   return (
     <div className="mx-[5%]">
-      <AddEmployeeModal
+      <AddEmployee
         show={openAddEmployeeModal}
         setShow={setOpenAddEmployeeModal}
       />
