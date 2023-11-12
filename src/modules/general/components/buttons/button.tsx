@@ -1,3 +1,5 @@
+import Spinner from '../spinner';
+
 /* eslint-disable react/button-has-type */
 type ButtonProps = {
   label: string;
@@ -7,11 +9,13 @@ type ButtonProps = {
   size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit';
   className?: string;
+  isLoading?: boolean;
 };
 
 function Button({
   label,
   onClick,
+  isLoading,
   icon,
   color = 'purple',
   size = 'sm',
@@ -31,8 +35,14 @@ function Button({
       h-[38px] font-light flex gap-2 justify-center items-center ${className}`}
       type={type}
     >
-      {icon && <img src={icon} alt="icon" />}
-      {label}
+      {isLoading ? (
+        <Spinner size="small" color={color} />
+      ) : (
+        <>
+          {icon && <img src={icon} alt="icon" />}
+          {label}
+        </>
+      )}
     </button>
   );
 }

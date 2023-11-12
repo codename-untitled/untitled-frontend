@@ -1,4 +1,5 @@
-import { MutationOptions } from 'modules/company/store/types';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { MutationOptions } from 'modules/general/store/types';
 import useSWRMutation from 'swr/mutation';
 
 type ErrorObject = Record<string, string[]>;

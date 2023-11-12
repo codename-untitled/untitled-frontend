@@ -118,6 +118,6 @@ class API {
   };
 }
 
-const baseURL = process.env.API_HOST || '';
+const baseURL = 'https://untitled-backend-jx9d.onrender.com';
 
 export const api = new API(baseURL, APIError);
