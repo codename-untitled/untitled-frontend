@@ -11,12 +11,13 @@ import {
 } from 'modules/general/store/auth';
 import { useCompanySignInMutation } from 'modules/general/store/auth/mutations';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { schema } from './validation';
 
 const SignIn = () => {
   const year = new Date().getFullYear();
   const session = useCompanySession();
+  const navigate = useNavigate();
 
   const mutation = useCompanySignInMutation({
     onSuccess: (response: CompanyResponse) => {
@@ -35,6 +36,7 @@ const SignIn = () => {
 
       session.setData(companyData);
       session.authorize(response.token);
+      navigate('/company');
     },
   });
 
