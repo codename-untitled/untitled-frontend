@@ -45,7 +45,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen h-[100%] flex bg-offWhite max-lg:bg-purp max-lg:bg-cover max-[375px]:min-h-full">
+    <div className="min-h-screen h-[100%] flex bg-offWhite max-lg:bg-purp max-lg:bg-cover max-[376px]:h-fit">
       <div className="basis-[55%] relative max-lg:basis-[100%]">
         <h1 className="text-[30px] font-extrabold ml-[10%] pt-5 max-lg:ml-0 max-lg:text-center max-lg:text-white">
           ONBOARDER
@@ -138,8 +138,10 @@ const SignIn = () => {
             className="absolute -left-10 top-[110px] max-sm:hidden"
           />
         </div>
-        <div className="absolute bottom-0 border-t-[0.5px] border-solid border-black w-full max-lg:bg-white max-[375px]:relative max-[375px]:mt-10">
-          <p className="text-[16px] py-3 text-center ">©onboarder {year}</p>
+        <div className="absolute bottom-0 border-t-[0.5px] border-solid border-black w-full max-lg:bg-white max-[375px]:relative max-[375px]:mt-[85%]">
+          <p className="text-[16px] py-3 text-center max-sm:text-[12px]">
+            ©onboarder {year}
+          </p>
         </div>
       </div>
       <div className="basis-[45%] bg-purp bg-cover max-lg:hidden" />
