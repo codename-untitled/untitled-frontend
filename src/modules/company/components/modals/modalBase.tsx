@@ -21,7 +21,7 @@ const ModalBase = ({
     }`}
   >
     <div
-      className={`w-[728px] h-[627px] shadow-[1px_1px_0px_0px_#000] border-solid border bg-white rounded-md mx-[5%] ${className}`}
+      className={`w-[728px] pb-10 shadow-[1px_1px_0px_0px_#000] border-solid border bg-white rounded-md mx-[5%] ${className}`}
     >
       <div className="flex justify-between px-[3%] py-[20px] border-b-[1px] border-black border-solid pb-2">
         <h1 className="text-[24px]">{modalLabel}</h1>

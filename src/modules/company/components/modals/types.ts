@@ -1,4 +1,4 @@
-export type ModalProps = {
+export interface ModalProps {
   show: boolean;
   setShow: (show: boolean) => void;
-};
+}
