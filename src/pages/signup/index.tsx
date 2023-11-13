@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
 import Button from 'modules/general/components/buttons/button';
-import FormField from 'modules/general/components/formField';
+import FormField from 'modules/general/components/formComponents/formField';
 import { CompanySignUpPayload } from 'modules/general/store/auth';
 import { useCompanySignupMutation } from 'modules/general/store/auth/mutations';
 import toast from 'react-hot-toast';
