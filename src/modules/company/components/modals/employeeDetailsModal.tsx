@@ -1,5 +1,5 @@
 import Button from '../../../general/components/buttons/button';
-import FormField from '../../../general/components/formField';
+import FormField from '../../../general/components/formComponents/formField';
 import ModalBase from './modalBase';
 import { ModalProps } from './types';
 

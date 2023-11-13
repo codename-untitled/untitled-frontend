@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
 import { useCompanySession } from 'hooks/useCompanySession';
 import Button from 'modules/general/components/buttons/button';
-import FormField from 'modules/general/components/formField';
+import FormField from 'modules/general/components/formComponents/formField';
 import {
   CompanyResponse,
   CompanySession,
@@ -72,7 +72,7 @@ const SignIn = () => {
                 values,
                 isSubmitting,
                 handleChange,
-                setFieldTouched,
+                handleBlur,
                 handleSubmit,
               }) => (
                 <form className="mt-[35px]" onSubmit={handleSubmit}>
@@ -82,7 +82,7 @@ const SignIn = () => {
                       name="email"
                       value={values.email}
                       onChange={handleChange}
-                      onBlur={() => setFieldTouched('email')}
+                      onBlur={handleBlur}
                       errors={errors.email}
                       touched={touched.email}
                     />
@@ -93,7 +93,7 @@ const SignIn = () => {
                         name="password"
                         value={values.password}
                         onChange={handleChange}
-                        onBlur={() => setFieldTouched('password')}
+                        onBlur={handleBlur}
                         errors={errors.password}
                         touched={touched.password}
                       />

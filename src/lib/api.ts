@@ -92,6 +92,18 @@ class API {
     return API.handleResponse(response, this.RequestError);
   };
 
+  put = async (path: string, body: Record<string, any>) => {
+    const options = {
+      method: 'PUT',
+      headers: this.headers,
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(this.getURL(path), options);
+
+    return API.handleResponse(response, this.RequestError);
+  };
+
   postFile = async (path: string, body: FormData) => {
     const options = {
       method: 'POST',

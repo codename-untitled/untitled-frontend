@@ -6,6 +6,7 @@ type UseQueryResponse<T> = {
   isLoading: boolean;
   data: T;
   error: APIError;
+  mutate: () => void;
 };
 
 export function useQuery<T>(
@@ -13,7 +14,7 @@ export function useQuery<T>(
   fetcher: (url: string) => Promise<Response>,
   config?: SWRConfiguration
 ): UseQueryResponse<T> {
-  const { error, data, isLoading, isValidating } = useSWR<Response>(
+  const { error, data, isLoading, isValidating, mutate } = useSWR<Response>(
     url,
     fetcher,
     {
@@ -27,5 +28,6 @@ export function useQuery<T>(
     data: (data ?? {}) as T,
     isLoading,
     isValidating,
+    mutate,
   };
 }

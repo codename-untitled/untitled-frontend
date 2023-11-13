@@ -3,15 +3,26 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useMediaQuery } from 'react-responsive';
 import TableRow from '@mui/material/TableRow';
-import { EmployeeList } from 'modules/company/store/employees';
+import { Employee } from 'modules/company/store/employees';
+import { useSearchParams } from 'react-router-dom';
 
-function EmployeeTable({ employees }: EmployeeList) {
+type Props = {
+  employees: Employee[];
+  openEditEmployeeModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function EmployeeTable({ employees, openEditEmployeeModal }: Props) {
+  const [, setSearchParams] = useSearchParams();
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1024px)',
   });
+
+  const onEmployeeClick = (id: string) => {
+    openEditEmployeeModal(true);
+    setSearchParams({ employeeId: id });
+  };
 
   return (
     <TableContainer>
@@ -30,7 +41,11 @@ function EmployeeTable({ employees }: EmployeeList) {
         </TableHead>
         <TableBody>
           {employees.map((employee) => (
-            <TableRow key={employee.email}>
+            <TableRow
+              key={employee.id}
+              className="cursor-pointer hover:bg-gray-100"
+              onClick={() => onEmployeeClick(employee.id)}
+            >
               <TableCell align="center">{employee.firstName}</TableCell>
               <TableCell align="center">{employee.lastName}</TableCell>
               {isDesktopOrLaptop && (

@@ -10,14 +10,14 @@ const Header = () => {
       <div className="flex gap-5">
         <Button
           label="Login"
-          onClick={() => navigate('/login')}
+          onClick={() => navigate('/signin')}
           color="white"
-          className="w-[141px] h-[48px]"
+          className="!w-[141px] !h-[48px]"
         />
         <Button
           label="Sign up"
           onClick={() => navigate('/signup')}
-          className="w-[141px] h-[48px]"
+          className="!w-[141px] !h-[48px]"
         />
       </div>
     </div>
