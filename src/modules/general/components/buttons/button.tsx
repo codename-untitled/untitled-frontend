@@ -3,6 +3,7 @@ type ButtonProps = {
   label: string;
   onClick?: () => void;
   icon?: string;
+  iconPosition?: 'left' | 'right';
   color?: 'purple' | 'white';
   size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit';
@@ -13,6 +14,7 @@ function Button({
   label,
   onClick,
   icon,
+  iconPosition = 'left',
   color = 'purple',
   size = 'sm',
   type = 'button',
@@ -30,8 +32,9 @@ function Button({
       h-[38px] font-light flex gap-2 justify-center items-center ${className}`}
       type={type}
     >
-      {icon && <img src={icon} alt="icon" />}
+      {icon && iconPosition === 'left' && <img src={icon} alt="icon" />}
       {label}
+      {icon && iconPosition === 'right' && <img src={icon} alt="icon" />}
     </button>
   );
 }
