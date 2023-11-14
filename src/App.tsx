@@ -7,6 +7,7 @@ import CompanyEmployees from 'pages/company/employees';
 import Repository from 'pages/company/repository';
 import Workflow from 'pages/company/workflow';
 import CreateWorkflow from 'pages/company/workflow/create';
+import Employee from 'pages/employee';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="workflow" element={<Workflow />} />
           <Route path="workflow/create" element={<CreateWorkflow />} />
         </Route>
+        <Route path="/employee" element={<Employee />} />
         <Route
           path={'/*'}
           element={<h1 className="text-center mt-4">404: Not Found</h1>}
