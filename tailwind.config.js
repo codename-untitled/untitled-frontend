@@ -4,7 +4,11 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        purp: "url('/src/assets/purple-bg.png')",
+      },
+    },
     colors: {
       ...colors,
       black: '#151515',
