@@ -2,7 +2,7 @@ import { useState } from 'react';
 import EmptyState from 'modules/company/components/emptyState';
 import EmployeeTable from 'modules/company/components/employeeTable';
 import Button from 'modules/general/components/buttons/button';
-import { useGetEmployees } from 'modules/company/store/employees/queries';
+import { useGetEmployees } from 'modules/company/store/employees';
 import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
 import AddEmployee from './addEmployee';
 import EditEmployee from './editEmployee';

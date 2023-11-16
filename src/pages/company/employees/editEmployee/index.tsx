@@ -2,8 +2,10 @@ import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
 import ModalBase from 'modules/company/components/modals/modalBase';
 import { ModalProps } from 'modules/company/components/modals/types';
-import { EditEmployeePayload } from 'modules/company/store/employees';
-import { useEditEmployeeMutation } from 'modules/company/store/employees/mutation';
+import {
+  EditEmployeePayload,
+  useEditEmployeeMutation,
+} from 'modules/company/store/employees';
 import { useGetEmployee } from 'modules/company/store/employees/queries';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
