@@ -1,12 +1,18 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useFormikContext } from 'formik';
+import Button from 'modules/general/components/buttons/button';
 import { ChangeEvent, useState } from 'react';
+
+type ParentValue = {
+  docs: string;
+};
 
 const Signature = () => {
   const [fileName, setFileName] = useState('Choose a file');
 
-  const { touched, values, handleChange, errors, handleBlur } =
-    useFormikContext();
+  const { touched, errors, handleSubmit, setFieldValue } =
+    useFormikContext<ParentValue>();
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileInput = event.target;
@@ -14,10 +20,13 @@ const Signature = () => {
     if (fileInput.files && fileInput.files.length > 0) {
       const selectedFile = fileInput.files[0];
       setFileName(selectedFile.name);
+      setFieldValue('docs', selectedFile);
     } else {
       setFileName('Choose a file');
     }
   };
+
+  const documentErrors = errors.docs;
 
   return (
     <div>
@@ -33,7 +42,13 @@ const Signature = () => {
           {fileName}
         </label>
       </div>
+      {documentErrors && touched.docs && (
+        <p className="text-[12px] text-red-600 ml-2">{documentErrors}</p>
+      )}
       <p className="flex justify-end text-[12px] mt-1">Max size 5mb</p>
+      <div>
+        <Button label="Save" color="green" onClick={handleSubmit} />
+      </div>
     </div>
   );
 };

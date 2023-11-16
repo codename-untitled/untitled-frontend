@@ -23,7 +23,7 @@ const checklistValues = {
 const signatureValues = {
   title: '',
   overview: '',
-  docs: '',
+  docs: null,
 };
 
 export const getInitialValue = (id: number) => {

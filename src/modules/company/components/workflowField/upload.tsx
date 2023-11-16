@@ -1,50 +1,61 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable operator-linebreak */
 /* eslint-disable react/no-array-index-key */
 import { FieldArray, FormikErrors, useFormikContext } from 'formik';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
 
-const Upload = () => {
-  type Document = {
-    // eslint-disable-next-line react/no-unused-prop-types
-    name: string;
-  };
+type Document = {
+  // eslint-disable-next-line react/no-unused-prop-types
+  name: string;
+};
 
-  type ParentValue = {
-    documents: Document[];
-  };
+type ParentValue = {
+  documents: Document[];
+};
+
+const Upload = () => {
+  const { touched, values, handleChange, errors, handleBlur, handleSubmit } =
+    useFormikContext<ParentValue>();
 
   const documentValues = {
     label: '',
   };
 
-  const { touched, values, handleChange, errors, handleBlur, handleSubmit } =
-    useFormikContext<ParentValue>();
-
   return (
     <div>
       <FieldArray name="documents">
-        {({ push }) => (
+        {({ push, remove }) => (
           <div className="flex flex-col gap-10 mt-10">
             {values.documents?.map(({ name }: Document, index) => (
-              <FormField
-                key={index}
-                placeholder="e.g NYSC Certificate"
-                name={`documents.${index}.name`}
-                value={name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                errors={
-                  (errors.documents as FormikErrors<{ name: string }>[])?.[
-                    index
-                  ]?.name
-                }
-                touched={
-                  touched.documents &&
-                  touched.documents[index] &&
-                  touched.documents[index].name
-                }
-              />
+              <div key={index}>
+                <p
+                  className={`flex justify-end text-[12px] cursor-pointer text-red-600 ${
+                    index === 0 && 'hidden'
+                  }`}
+                  onClick={() => remove(index)}
+                >
+                  delete
+                </p>
+                <FormField
+                  placeholder="e.g NYSC Certificate"
+                  name={`documents.${index}.name`}
+                  value={name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  errors={
+                    (errors.documents as FormikErrors<{ name: string }>[])?.[
+                      index
+                    ]?.name
+                  }
+                  touched={
+                    touched.documents &&
+                    touched.documents[index] &&
+                    touched.documents[index].name
+                  }
+                />
+              </div>
             ))}
             <div className="flex gap-2">
               <Button

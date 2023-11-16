@@ -8,13 +8,13 @@ interface TestContextExtended {
 export const signatureSchema = Yup.object().shape({
   title: Yup.string().required('title is required'),
   overview: Yup.string().required('overview is required'),
-  document: Yup.mixed()
+  docs: Yup.mixed()
     .test('fileSize', 'File size is too large', (value, context) => {
       const { originalValue } = context as Yup.TestContext &
         TestContextExtended;
       return originalValue && originalValue.size <= 5 * 1024 * 1024;
     })
-    .required('A document is required'),
+    .required('a document is required'),
 });
 
 export const checklistSchema = Yup.object().shape({

@@ -1,9 +1,7 @@
 import { Formik, useFormikContext } from 'formik';
 import {
-  ChecklistData,
-  SignData,
-  UploadData,
   useCreateChecklistOrUploadMutation,
+  useCreateSignatureMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
 import FormField from 'modules/general/components/formComponents/formField';
@@ -29,7 +27,16 @@ const WorkflowField = ({ index }: Props) => {
       toast.success('Saved');
       // eslint-disable-next-line no-underscore-dangle
       setFieldValue(`steps.${index}.step`, response._id);
-      setFieldValue(`steps.${index}.order`, index);
+      setFieldValue(`steps.${index}.order`, index + 1);
+    },
+  });
+
+  const signatureMutation = useCreateSignatureMutation({
+    onSuccess: (response) => {
+      toast.success('Saved');
+      // eslint-disable-next-line no-underscore-dangle
+      setFieldValue(`steps.${index}.step`, response._id);
+      setFieldValue(`steps.${index}.order`, index + 1);
     },
   });
 
@@ -44,6 +51,7 @@ const WorkflowField = ({ index }: Props) => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (selectId === 1) {
       const payload = {
@@ -59,6 +67,14 @@ const WorkflowField = ({ index }: Props) => {
         data,
       };
       mutation.mutate(payload);
+    }
+
+    if (selectId === 3) {
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('overview', data.overview);
+      formData.append('docs', data.docs);
+      signatureMutation.mutate(formData);
     }
   };
 

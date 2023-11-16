@@ -6,9 +6,17 @@ import FormField from 'modules/general/components/formComponents/formField';
 import { FieldArray, Formik } from 'formik';
 import { flushSync } from 'react-dom';
 import { useRef } from 'react';
+import {
+  useCreateWorkflowMutation,
+  WorkflowPayload,
+} from 'modules/company/store/workflow';
+import toast from 'react-hot-toast';
+import { FormikStateContextError } from 'helpers/context-error';
+import { useNavigate } from 'react-router-dom';
 import { schema } from './validation';
 
 const CreateWorkflow = () => {
+  const navigate = useNavigate();
   const stepsRef = useRef<HTMLDivElement | null>(null);
 
   const workflowValues = {
@@ -26,13 +34,22 @@ const CreateWorkflow = () => {
     });
   };
 
-  const onSubmit = () => {};
+  const mutation = useCreateWorkflowMutation({
+    onSuccess: () => {
+      toast.success('Workflow Created');
+      navigate('/company/workflow');
+    },
+  });
+
+  const onSubmit = (data: WorkflowPayload) => {
+    mutation.mutate(data);
+  };
 
   return (
     <div className="mx-[5%]">
       <div className="mt-[30px] rounded-md bg-white pb-10 h-[80vh] shadow-[1px_1px_0px_0px_#000] border-solid border max-sm:h-[650px] overflow-y-auto">
         <div className="mt-5 ml-5">
-          <Button label="Back" color="black" />
+          <Button label="Back" color="black" onClick={() => navigate(-1)} />
         </div>
         <h1 className="text-center text-[24px] font-semibold mt-3">
           New Workflow
@@ -53,9 +70,9 @@ const CreateWorkflow = () => {
           {({
             values,
             touched,
-            // isSubmitting,
             errors,
             handleChange,
+            isSubmitting,
             handleBlur,
             handleSubmit,
           }) => (
@@ -94,11 +111,21 @@ const CreateWorkflow = () => {
                         color="green"
                         type="button"
                       />
-                      <Button label="Submit" size="md" color="purple" />
+                      <Button
+                        label="Submit"
+                        size="md"
+                        color="purple"
+                        onClick={handleSubmit}
+                        isLoading={isSubmitting}
+                      />
                     </div>
                   </div>
                 )}
               </FieldArray>
+              <FormikStateContextError
+                mutation={mutation}
+                toasterId="create-worlflow-toast"
+              />
             </form>
           )}
         </Formik>

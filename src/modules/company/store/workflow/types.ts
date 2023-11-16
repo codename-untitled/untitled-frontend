@@ -23,10 +23,10 @@ export type ChecklistOrUploadPayload = {
   data: ChecklistData | UploadData;
 };
 
-export type SignData = {
+export type SignaturePayload = {
   title: string;
   overview: string;
-  docs: string;
+  docs: File;
 };
 
 export enum WorkflowTypes {
@@ -34,3 +34,22 @@ export enum WorkflowTypes {
   UPLOAD_DOCUMENT = 'UploadDocument',
   SIGN_DOCUMENT = 'SignDocument',
 }
+
+type StepDocuments = {
+  step: string;
+  order: string;
+};
+
+export interface WorkflowPayload {
+  title: string;
+  overview: string;
+  steps: StepDocuments[];
+}
+
+export interface WorkflowData extends WorkflowPayload {
+  id: string;
+}
+
+export type WorkflowResponse = {
+  data: WorkflowData[];
+};

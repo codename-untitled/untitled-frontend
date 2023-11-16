@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 type Props = {
   setSelectId: Dispatch<SetStateAction<number>>;
@@ -8,6 +9,7 @@ type Props = {
 
 export default function WorkflowSelect({ setSelectId }: Props) {
   const [dropDownOpen, setDropDownOpen] = useState(false);
+  const location = useLocation();
   const [labelIndex, setLabelIndex] = useState(0);
 
   const onOptionClick = (index: number, id: number) => {
@@ -16,7 +18,20 @@ export default function WorkflowSelect({ setSelectId }: Props) {
     setSelectId(id);
   };
 
-  const options = [
+  const defaultOptions = [
+    {
+      id: 1,
+      name: 'Checklist',
+      icon: require('assets/checklisticon.svg').default,
+    },
+    {
+      id: 2,
+      name: 'Upload',
+      icon: require('assets/document-upload-purp.svg').default,
+    },
+  ];
+
+  const signatureOptions = [
     {
       id: 1,
       name: 'Checklist',
@@ -33,6 +48,14 @@ export default function WorkflowSelect({ setSelectId }: Props) {
       icon: require('assets/signicon.svg').default,
     },
   ];
+
+  const [options, setOptions] = useState(defaultOptions);
+
+  useEffect(() => {
+    if (location.pathname !== '/company/workflow/create') {
+      setOptions(signatureOptions);
+    }
+  }, []);
 
   return (
     <div className="relative">
@@ -63,7 +86,7 @@ export default function WorkflowSelect({ setSelectId }: Props) {
         )}
       </button>
       {dropDownOpen && (
-        <div className="absolute mt-2 h-[100px] shadow-[1px_1px_0px_0px_#000] w-[140px] border-solid border-[0.5px] rounded-md border-black bg-white">
+        <div className="absolute mt-2 pb-2 shadow-[1px_1px_0px_0px_#000] w-[140px] border-solid border-[0.5px] rounded-md border-black bg-white">
           <ul className="text-[14px] flex flex-col gap-2 mt-2">
             {options.map((option, index) => (
               <li
