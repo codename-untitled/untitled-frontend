@@ -22,6 +22,7 @@ const CompanyEmployees = () => {
       </div>
     );
   }
+
   return (
     <div className="mx-[5%]">
       <AddEmployee

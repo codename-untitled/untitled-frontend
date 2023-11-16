@@ -10,6 +10,7 @@ type ButtonProps = {
   type?: 'button' | 'submit';
   className?: string;
   isLoading?: boolean;
+  disabled?: boolean;
 };
 
 function Button({
@@ -20,6 +21,7 @@ function Button({
   color = 'purple',
   size = 'sm',
   type = 'button',
+  disabled,
   className,
 }: ButtonProps) {
   return (
@@ -31,11 +33,13 @@ function Button({
       ${color === 'black' && 'bg-black text-white'}
       ${color === 'green' && 'bg-green text-white'}
       ${color === 'white' && 'bg-white text-black'}
+      ${disabled && 'bg-gray-200 cursor-not-allowed'}
       ${size === 'sm' && ' w-[92px]'}
       ${size === 'md' && ' w-[163px]'}
       ${size === 'lg' && ' w-[440px]'} 
       h-[38px] font-light flex gap-2 justify-center items-center ${className}`}
       type={type}
+      disabled={disabled}
     >
       {isLoading ? (
         <Spinner size="small" color={color} />
