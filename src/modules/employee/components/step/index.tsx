@@ -30,7 +30,7 @@ const Step = ({
         {hasBackButton && (
           <Button
             label="Back"
-            className="py-4 h-max w-[140px]"
+            className="py-4 h-max !w-[140px]"
             color="white"
             onClick={onBackClick}
           />
@@ -38,7 +38,7 @@ const Step = ({
         {hasProceedButton && (
           <Button
             label="Proceed"
-            className="py-4 h-max w-[140px]"
+            className="py-4 h-max !w-[140px]"
             icon={require('assets/arrow-right.svg').default}
             iconPosition="right"
             onClick={onProceedClick}
@@ -47,7 +47,7 @@ const Step = ({
         {hasCompleteButton && (
           <Button
             label="Complete"
-            className="py-4 h-max w-[140px]"
+            className="py-4 h-max !w-[140px]"
             onClick={onCompleteClick}
           />
         )}
