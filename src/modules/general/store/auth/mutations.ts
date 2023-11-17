@@ -17,3 +17,12 @@ export const useCompanySignInMutation = (options: MutationOptions<undefined>) =>
     onError: options.onError,
     extra: options.extra,
   });
+
+export const useEmployeeSignInMutation = (
+  options: MutationOptions<undefined>
+) =>
+  useMutation<SignInPayload, undefined>('employees/login', api.post, {
+    onSuccess: (response, key) => options.onSuccess(response, key),
+    onError: options.onError,
+    extra: options.extra,
+  });

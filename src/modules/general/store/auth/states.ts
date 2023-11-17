@@ -22,5 +22,6 @@ export const EmployeeSessionAtom = atom<EmployeeSession | null>({
   email: '',
   phoneNumber: '',
   address: '',
+  token: '',
   isAuthenticated: false,
 });
