@@ -19,11 +19,17 @@ export type EmployeeSession = {
   email: string;
   phoneNumber: string;
   address: string;
+  token: string;
   isAuthenticated: boolean;
 };
 
 export type CompanyResponse = {
   company: CompanySession;
+  token: string;
+};
+
+export type EmployeeResponse = {
+  employee: EmployeeSession;
   token: string;
 };
 
