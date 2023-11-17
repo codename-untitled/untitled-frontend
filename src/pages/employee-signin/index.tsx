@@ -11,7 +11,7 @@ import {
 } from 'modules/general/store/auth';
 import { useEmployeeSignInMutation } from 'modules/general/store/auth/mutations';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { schema } from './validation';
 
 const EmployeeSignIn = () => {
@@ -112,15 +112,6 @@ const EmployeeSignIn = () => {
                       type="submit"
                       isLoading={isSubmitting}
                     />
-                    <p className="text-[12px] mt-4">
-                      Already have an account?{' '}
-                      <Link
-                        className="text-chartPurple cursor-pointer"
-                        to="/signup"
-                      >
-                        Sign up
-                      </Link>
-                    </p>
                   </div>
                   <FormikStateContextError
                     mutation={mutation}
