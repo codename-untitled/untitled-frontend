@@ -1,4 +1,5 @@
-import { checklistSchema, signatureSchema, uploadSchema } from './validation';
+import { WorkflowTypes } from 'modules/company/store/workflow';
+import { checklistSchema, signatureSchema, uploadSchema } from '../validation';
 
 const uploadValues = {
   title: '',
@@ -26,22 +27,22 @@ const signatureValues = {
   docs: null,
 };
 
-export const getInitialValue = (id: number) => {
+export const getInitialValue = (id: string) => {
   switch (id) {
-    case 1:
+    case WorkflowTypes.CHECKLIST:
       return checklistValues;
-    case 2:
+    case WorkflowTypes.UPLOAD_DOCUMENT:
       return uploadValues;
     default:
       return signatureValues;
   }
 };
 
-export const getSchema = (id: number) => {
+export const getSchema = (id: string) => {
   switch (id) {
-    case 1:
+    case WorkflowTypes.CHECKLIST:
       return checklistSchema;
-    case 2:
+    case WorkflowTypes.UPLOAD_DOCUMENT:
       return uploadSchema;
     default:
       return signatureSchema;

@@ -11,6 +11,7 @@ import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
+import EditWorkflow from 'pages/company/workflow/edit';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="employee" element={<CompanyEmployees />} />
             <Route path="workflow" element={<Workflow />} />
             <Route path="workflow/create" element={<CreateWorkflow />} />
+            <Route path="workflow/edit/:id" element={<EditWorkflow />} />
           </Route>
         </Route>
         <Route

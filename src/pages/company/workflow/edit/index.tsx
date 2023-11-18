@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-empty-pattern */
-import WorkflowField from 'modules/company/components/workflowField/createWorkflow';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
 import { FieldArray, Formik } from 'formik';
@@ -8,19 +9,44 @@ import { flushSync } from 'react-dom';
 import { useRef } from 'react';
 import {
   useCreateWorkflowMutation,
+  useGetWorkflowDetails,
   WorkflowPayload,
 } from 'modules/company/store/workflow';
 import toast from 'react-hot-toast';
 import { FormikStateContextError } from 'helpers/context-error';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
+import EditWorkflowField from 'modules/company/components/workflowField/editWorkflow';
 import { schema } from './validation';
 
-const CreateWorkflow = () => {
+const EditWorkflow = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const stepsRef = useRef<HTMLDivElement | null>(null);
+
+  const { data: workflowSchema, isLoading } = useGetWorkflowDetails(
+    params.id as string
+  );
+
+  const transformWorkflowDataToFormikValues = () => {
+    const initialValues = {
+      title: workflowSchema.title,
+      overview: workflowSchema.overview,
+      steps: workflowSchema.steps.map((step: any) => ({
+        step: step.step._id,
+        type: step.step.type,
+        data: step.step.data,
+        order: step.order,
+      })),
+    };
+
+    return initialValues;
+  };
 
   const workflowValues = {
     step: '',
+    type: '',
+    data: '',
     order: '',
   };
 
@@ -45,6 +71,16 @@ const CreateWorkflow = () => {
     mutation.mutate(data);
   };
 
+  if (isLoading) {
+    return (
+      <div className="mx-[5%] mt-[60px] rounded-md bg-white h-[600px] shadow-[1px_1px_0px_0px_#000] border-solid border">
+        <div className="flex justify-center mt-[15%]">
+          <SpinnerLoader />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-[5%]">
       <div className="mt-[30px] rounded-md bg-white pb-10 h-[80vh] shadow-[1px_1px_0px_0px_#000] border-solid border max-sm:h-full overflow-y-auto">
@@ -58,11 +94,7 @@ const CreateWorkflow = () => {
           Create steps and assign to specific employee
         </p>
         <Formik
-          initialValues={{
-            title: '',
-            overview: '',
-            steps: [workflowValues],
-          }}
+          initialValues={transformWorkflowDataToFormikValues()}
           validationSchema={schema}
           onSubmit={onSubmit}
           enableReinitialize
@@ -102,32 +134,35 @@ const CreateWorkflow = () => {
               </div>
               <FieldArray name="steps">
                 {({ push, remove }) => (
-                  <div className="flex flex-col gap-10 mt-10" ref={stepsRef}>
-                    {values.steps.map((_, index) => (
-                      <WorkflowField
-                        key={index}
-                        index={index}
-                        remove={remove}
-                        lastIndex={
-                          index !== 0 && index === values.steps.length - 1
-                        }
-                      />
-                    ))}
-                    <div className="flex gap-2">
-                      <Button
-                        label="+ Add step"
-                        size="md"
-                        onClick={() => addItems(push)}
-                        color="green"
-                        type="button"
-                      />
-                      <Button
-                        label="Submit"
-                        size="md"
-                        color="purple"
-                        onClick={handleSubmit}
-                        isLoading={isSubmitting}
-                      />
+                  <div>
+                    <div className="flex flex-col gap-10 mt-10" ref={stepsRef}>
+                      {values?.steps.map((_: unknown, index: number) => (
+                        <EditWorkflowField
+                          index={index}
+                          key={index}
+                          workflowSchema={workflowSchema.steps[index]?.step}
+                          remove={remove}
+                          lastIndex={
+                            index !== 0 && index === values.steps.length - 1
+                          }
+                        />
+                      ))}
+                      <div className="flex gap-2">
+                        <Button
+                          label="+ Add step"
+                          size="md"
+                          onClick={() => addItems(push)}
+                          color="green"
+                          type="button"
+                        />
+                        <Button
+                          label="Submit"
+                          size="md"
+                          color="purple"
+                          onClick={handleSubmit}
+                          isLoading={isSubmitting}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -144,4 +179,4 @@ const CreateWorkflow = () => {
   );
 };
 
-export default CreateWorkflow;
+export default EditWorkflow;

@@ -4,6 +4,7 @@ import { MutationOptions } from 'modules/general/store/types';
 import {
   ChecklistOrUploadPayload,
   SignaturePayload,
+  StepToWorkflowPayload,
   WorkflowPayload,
 } from './types';
 
@@ -34,3 +35,25 @@ export const useCreateWorkflowMutation = (
     onSuccess: options.onSuccess,
     onError: options.onError,
   });
+
+export const useUpdateStepMutation = (
+  stepId: string,
+  options: MutationOptions<undefined>
+) =>
+  useMutation<any, undefined>(`onboarding-step/${stepId}`, api.put, {
+    onSuccess: options.onSuccess,
+    onError: options.onError,
+  });
+
+export const useAddStepToWorkflowMutation = (
+  workflowId: string,
+  options: MutationOptions<undefined>
+) =>
+  useMutation<StepToWorkflowPayload, undefined>(
+    `onboarding-workflow/add-step/${workflowId}`,
+    api.post,
+    {
+      onSuccess: options.onSuccess,
+      onError: options.onError,
+    }
+  );

@@ -18,6 +18,12 @@ export type UploadData = {
   items: UploadDocuments[];
 };
 
+export type SignatureData = {
+  title: string;
+  overview: string;
+  documents: { name: string; url: string }[];
+};
+
 export type ChecklistOrUploadPayload = {
   type: string;
   data: ChecklistData | UploadData;
@@ -47,9 +53,58 @@ export interface WorkflowPayload {
 }
 
 export interface WorkflowData extends WorkflowPayload {
-  id: string;
+  _id: string;
 }
 
 export type WorkflowResponse = {
   data: WorkflowData[];
+};
+
+export type UploadDocument = {
+  id: string;
+  title: string;
+  overview: string;
+  documents: '';
+};
+
+export type Step = {
+  id: string;
+  type: 'UploadDocument' | 'SignDocument' | 'CheckList';
+  data: '';
+};
+
+export type WorkflowDetailsResponse = {
+  id: string;
+  title: string;
+  overview: string;
+  steps: [];
+};
+
+export type StepToWorkflowPayload = {
+  stepId: string;
+  order: string;
+};
+
+export interface SignDocumentSchema {
+  _id: string;
+  type: 'UploadDocument';
+  data: UploadData;
+}
+
+export interface StepSchema {
+  _id: string;
+  type: WorkflowTypes;
+  data: ChecklistData | UploadData | SignatureData;
+}
+
+interface WorkflowStep {
+  step: StepSchema;
+  order: number;
+  _id: string;
+}
+export type WorkflowSchema = {
+  _id: string;
+  title: string;
+  overview: string;
+  steps: WorkflowStep[];
 };
