@@ -7,12 +7,12 @@ export const useCompanySession = () => {
 
   const authorize = (token: string) => {
     api.authorize(token);
-    localStorage.setItem('companyToken', token);
+    sessionStorage.setItem('companyToken', token);
   };
 
   const destroy = () => {
     api.authorize('');
-    localStorage.removeItem('companyToken');
+    sessionStorage.removeItem('companyToken');
     setData(null);
   };
 

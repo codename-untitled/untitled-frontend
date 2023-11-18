@@ -5,7 +5,7 @@ import { useLocation, Outlet, Navigate } from 'react-router-dom';
 const CompanyAuth = () => {
   const location = useLocation();
 
-  const token = localStorage.getItem('companyToken');
+  const token = sessionStorage.getItem('companyToken');
 
   useEffect(() => {
     api.authorize(token);
