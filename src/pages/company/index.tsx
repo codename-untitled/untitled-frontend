@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Turn as Hamburger } from 'hamburger-react';
 import Avatar from '@mui/material/Avatar';
+import Logo from 'modules/general/components/logo';
 import MobileNavbar from 'modules/company/components/mobileNavbar';
 
 export type NavbarLink = {
@@ -51,12 +52,8 @@ const Company = () => {
           isNavbarCollapsed ? 'basis-1/12' : 'basis-2/12'
         } max-lg:hidden`}
       >
-        <div className="flex flex-col items-center mt-5 gap-36 relative">
-          <img
-            src={require('assets/Untitled team logo 2.svg').default}
-            alt=""
-            className="h-10 w-16"
-          />
+        <div className="flex flex-col items-center mt-8 gap-36 relative">
+          <Logo className="w-[150px]" />
           <button
             className="absolute right-0 mt-20 cursor-pointer"
             onClick={() => setIsNavbarCollapsed(!isNavbarCollapsed)}
