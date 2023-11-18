@@ -33,13 +33,20 @@ const EmployeeSignIn = () => {
         email: response.employee.email,
         phoneNumber: response.employee.phoneNumber,
         address: response.employee.address,
+        hasChangedPassword: response.employee.hasChangedPassword,
         token: response.token,
         isAuthenticated: true,
       };
 
       session.setData(employeeData);
       session.authorize(response.token);
-      navigate('/employee');
+      if (!response.employee.hasChangedPassword) {
+        // Redirect to the reset password page
+        navigate('/employee/reset-password');
+      } else {
+        // Redirect to the employee dashboard
+        navigate('/employee');
+      }
     },
   });
 

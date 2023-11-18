@@ -19,6 +19,7 @@ export type EmployeeSession = {
   email: string;
   phoneNumber: string;
   address: string;
+  hasChangedPassword: boolean;
   token: string;
   isAuthenticated: boolean;
 };
@@ -45,4 +46,9 @@ export type CompanySignUpPayload = {
 export type SignInPayload = {
   email: string;
   password: string;
+};
+
+export type ChangePasswordPayload = {
+  oldPassword: string;
+  newPassword: string;
 };
