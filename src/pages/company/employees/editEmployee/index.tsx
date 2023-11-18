@@ -57,6 +57,7 @@ const EditEmployee = ({ show, setShow, mutate }: EditEmployeeProps) => {
             }}
             validationSchema={schema}
             onSubmit={onSubmit}
+            enableReinitialize
           >
             {({
               errors,
