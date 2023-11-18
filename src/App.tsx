@@ -9,12 +9,12 @@ import Workflow from 'pages/company/workflow';
 import CreateWorkflow from 'pages/company/workflow/create';
 import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
-// import EmployeeSignIn from 'pages/employee-signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
 import Employee from 'pages/employee';
 import EmployeeSignIn from 'pages/employee-signin';
-//  import EmployeeAuth from 'modules/general/components/employeeAuth';
+import ResetPassword from 'pages/reset-password';
+import EmployeeAuth from 'modules/general/components/employeeAuth';
 
 function App() {
   return (
@@ -24,8 +24,9 @@ function App() {
         <Route element={<NoAuth />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/employee/signin" element={<EmployeeSignIn />} />
+          <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
-        <Route path="/employee/signin" element={<EmployeeSignIn />} />
         <Route element={<CompanyAuth />}>
           <Route path="/company" element={<Company />}>
             <Route index element={<Analytics />} />
@@ -35,7 +36,9 @@ function App() {
             <Route path="workflow/create" element={<CreateWorkflow />} />
           </Route>
         </Route>
-        <Route path="/employee" element={<Employee />} />
+        <Route element={<EmployeeAuth />}>
+          <Route path="/employee" element={<Employee />} />
+        </Route>
         <Route
           path={'/*'}
           element={<h1 className="text-center mt-4">404: Not Found</h1>}
