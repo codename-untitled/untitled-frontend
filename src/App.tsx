@@ -7,6 +7,7 @@ import CompanyEmployees from 'pages/company/employees';
 import Repository from 'pages/company/repository';
 import Workflow from 'pages/company/workflow';
 import CreateWorkflow from 'pages/company/workflow/create';
+import Profile from 'pages/company/profile';
 import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
@@ -34,6 +35,7 @@ function App() {
             <Route path="employee" element={<CompanyEmployees />} />
             <Route path="workflow" element={<Workflow />} />
             <Route path="workflow/create" element={<CreateWorkflow />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Route>
         <Route element={<EmployeeAuth />}>
