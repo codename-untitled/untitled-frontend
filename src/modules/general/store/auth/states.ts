@@ -23,17 +23,6 @@ export const EmployeeSessionAtom = atom<EmployeeSession | null>({
   phoneNumber: '',
   address: '',
   hasChangedPassword: false,
-  oldPassword: '',
-  newPassword: '',
-  confirmNewPassword: '',
-  token: '',
-  isAuthenticated: false,
-});
-
-export const PasswordSessionAtom = atom({
-  id: '',
-  oldPassword: '',
-  newPassword: '',
   token: '',
   isAuthenticated: false,
 });

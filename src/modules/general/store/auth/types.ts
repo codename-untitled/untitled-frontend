@@ -20,18 +20,6 @@ export type EmployeeSession = {
   phoneNumber: string;
   address: string;
   hasChangedPassword: boolean;
-  oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
-  token: string;
-  isAuthenticated: boolean;
-};
-
-export type PasswordSession = {
-  id: string;
-  oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
   token: string;
   isAuthenticated: boolean;
 };
@@ -63,5 +51,4 @@ export type SignInPayload = {
 export type ChangePasswordPayload = {
   oldPassword: string;
   newPassword: string;
-  confirmNewPassword: string;
 };

@@ -1,40 +1,27 @@
 /* eslint-disable no-underscore-dangle */
 import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
-import { useSession } from 'hooks/useSession';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
-import {
-  EmployeeResponse,
-  PasswordSession,
-  ChangePasswordPayload,
-} from 'modules/general/store/auth';
+import { ChangePasswordPayload } from 'modules/general/store/auth';
 import { useChangePasswordMutation } from 'modules/general/store/auth/mutations';
 import toast from 'react-hot-toast';
-// import { useNavigate } from 'react-router-dom';
-import Header from 'modules/general/components/header';
+import { useNavigate } from 'react-router-dom';
 import Footer from 'modules/general/components/footer';
+import { useMediaQuery } from 'react-responsive';
+import { schema } from './validation';
 
 const ResetPassword = () => {
-  const session = useSession();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1024px)',
+  });
 
   const mutation = useChangePasswordMutation({
-    onSuccess: (response: EmployeeResponse) => {
+    onSuccess: () => {
       toast.success('Success');
-
-      const employeeData: PasswordSession = {
-        id: response.employee.id,
-        oldPassword: response.employee.oldPassword,
-        newPassword: response.employee.newPassword,
-        confirmNewPassword: response.employee.confirmNewPassword,
-        token: response.token,
-        isAuthenticated: true,
-      };
-
-      session.setData(employeeData);
-      session.authorize(response.token);
-      // navigate('/employee');
+      navigate('/employee');
     },
   });
 
@@ -45,10 +32,22 @@ const ResetPassword = () => {
   return (
     <div className="min-h-screen h-[100%] flex bg-offWhite max-lg:bg-purp max-lg:bg-cover max-[376px]:h-fit">
       <div className="basis-[100%] relative max-lg:basis-[100%]">
-        <Header />
+        <div className="flex justify-between items-center px-[5%] py-4 border-b-[0.5px] border-black border-solid">
+          <h1 className="text-[30px] font-extrabold text-[#353535] max-lg:text-white max-sm:text-[20px]">
+            ONBOARDER
+          </h1>
+          <div className="flex gap-5">
+            <Button
+              label="Login"
+              onClick={() => navigate('/signin')}
+              color={isDesktopOrLaptop ? 'purple' : 'white'}
+              className="!w-[141px] !h-[48px]"
+            />
+          </div>
+        </div>
 
         <div className="max-w-[510px] block mx-auto mt-[10vh] z-30 relative max-sm:px-10 max-sm:mt-[15%]">
-          <div className="px-[10%] shadow-[1px_1px_0px_0px_#000] h-[478px] w-[510px] border-solid border-[0.5px] border-black bg-white rounded-md z-30 max-sm:h-full max-sm:w-full max-sm:pb-6">
+          <div className="px-[10%] shadow-[1px_1px_0px_0px_#000] pb-10 w-[510px] border-solid border-[0.5px] border-black bg-white rounded-md z-30 max-sm:h-full max-sm:w-full max-sm:pb-6">
             <p className="text-center text-[24px] font-bold mt-[30px]">
               Change Password
             </p>
@@ -58,6 +57,7 @@ const ResetPassword = () => {
                 newPassword: '',
                 confirmNewPassword: '',
               }}
+              validationSchema={schema}
               onSubmit={onSubmit}
             >
               {({
@@ -112,7 +112,7 @@ const ResetPassword = () => {
                   </div>
                   <FormikStateContextError
                     mutation={mutation}
-                    toasterId="sign-in-toast"
+                    toasterId="reset-password-toast"
                   />
                 </form>
               )}
