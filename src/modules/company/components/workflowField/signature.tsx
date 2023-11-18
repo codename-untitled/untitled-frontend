@@ -8,8 +8,14 @@ type ParentValue = {
   docs: string;
 };
 
-const Signature = () => {
-  const [fileName, setFileName] = useState('Choose a file');
+type Props = {
+  workflowSchema?: any;
+};
+
+const Signature = ({ workflowSchema }: Props) => {
+  const [fileName, setFileName] = useState(
+    workflowSchema?.data?.documents[0]?.name ?? 'Choose a file'
+  );
 
   const { touched, errors, handleSubmit, setFieldValue } =
     useFormikContext<ParentValue>();
@@ -37,12 +43,9 @@ const Signature = () => {
           id="file-upload"
           onChange={handleFileChange}
         />
-        <label
-          className="flex gap-1 cursor-pointer line-clamp-1"
-          htmlFor="file-upload"
-        >
+        <label className="flex gap-1 cursor-pointer" htmlFor="file-upload">
           <img src={require('assets/document-upload.svg').default} alt="" />
-          {fileName}
+          <span className="line-clamp-1">{fileName}</span>
         </label>
       </div>
       {documentErrors && touched.docs && (

@@ -5,12 +5,12 @@
 import { Formik, useFormikContext } from 'formik';
 import {
   useCreateChecklistOrUploadMutation,
-  useCreateSignatureMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
 import FormField from 'modules/general/components/formComponents/formField';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { createSignature } from 'modules/company/store/workflow/customMutation';
 import WorkflowSelect from '../../workflowSelect';
 import Checklist from '../checklist';
 import Signature from '../signature';
@@ -47,14 +47,6 @@ const WorkflowField = ({ index }: Props) => {
     },
   });
 
-  const signatureMutation = useCreateSignatureMutation({
-    onSuccess: (response) => {
-      toast.success('Saved');
-      setFieldValue(`steps.${index}.step`, response._id);
-      setFieldValue(`steps.${index}.order`, index + 1);
-    },
-  });
-
   const onSubmit = (data: any) => {
     if (selectId === WorkflowTypes.CHECKLIST) {
       const payload = {
@@ -78,7 +70,17 @@ const WorkflowField = ({ index }: Props) => {
       formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
 
-      signatureMutation.mutate(formData);
+      createSignature(formData)
+        .then((response) => {
+          if (response) {
+            toast.success('Success');
+            setFieldValue(`steps.${index}.step`, response.data._id);
+            setFieldValue(`steps.${index}.order`, index + 1);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.error);
+        });
     }
   };
 

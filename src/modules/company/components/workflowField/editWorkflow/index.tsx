@@ -39,7 +39,7 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
       case WorkflowTypes.UPLOAD_DOCUMENT:
         return <Upload />;
       default:
-        return <Signature />;
+        return <Signature workflowSchema={workflowSchema} />;
     }
   };
 

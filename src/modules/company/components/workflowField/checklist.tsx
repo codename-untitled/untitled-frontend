@@ -5,6 +5,7 @@
 import { FieldArray, FormikErrors, useFormikContext } from 'formik';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
+import { useLocation } from 'react-router-dom';
 
 type Items = {
   // eslint-disable-next-line react/no-unused-prop-types
@@ -16,6 +17,7 @@ type ParentValue = {
 };
 
 const Checklist = () => {
+  const location = useLocation();
   const { touched, values, handleChange, errors, handleBlur, handleSubmit } =
     useFormikContext<ParentValue>();
 
@@ -31,14 +33,17 @@ const Checklist = () => {
             <div className="flex flex-col gap-10 mt-10">
               {values.items?.map(({ label }: Items, index) => (
                 <div key={index}>
-                  <p
-                    className={`flex justify-end text-[12px] cursor-pointer text-red-600 ${
-                      index === 0 && 'hidden'
-                    }`}
-                    onClick={() => remove(index)}
-                  >
-                    delete
-                  </p>
+                  {location.pathname === '/company/workflow/create' && (
+                    <p
+                      className={`flex justify-end text-[12px] cursor-pointer text-red-600 ${
+                        index === 0 && 'hidden'
+                      }`}
+                      onClick={() => remove(index)}
+                    >
+                      delete
+                    </p>
+                  )}
+
                   <FormField
                     placeholder="E.g Have you collected your laptop?"
                     name={`items.${index}.label`}

@@ -3,7 +3,6 @@ import { api } from 'lib/api';
 import { MutationOptions } from 'modules/general/store/types';
 import {
   ChecklistOrUploadPayload,
-  SignaturePayload,
   StepToWorkflowPayload,
   AssignWorkflowPayload,
   WorkflowPayload,
