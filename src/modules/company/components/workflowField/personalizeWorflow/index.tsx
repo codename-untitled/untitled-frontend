@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-underscore-dangle */
 import { Formik, useFormikContext } from 'formik';
 import {
   StepSchema,
-  useAddStepToWorkflowMutation,
+  useAddStepToAssignedWorkflowMutation,
   useCreateChecklistOrUploadMutation,
-  useCreateSignatureMutation,
   useUpdateStepMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
+import { createSignature } from 'modules/company/store/workflow/customMutation';
 import FormField from 'modules/general/components/formComponents/formField';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -50,7 +51,7 @@ const EditWorkflowField = ({
     }
   };
 
-  const addStepToWorkflowMutation = useAddStepToWorkflowMutation(
+  const addStepToWorkflowMutation = useAddStepToAssignedWorkflowMutation(
     `${params.id}`,
     {
       onSuccess: () => {
@@ -74,21 +75,12 @@ const EditWorkflowField = ({
     },
   });
 
-  const signatureMutation = useCreateSignatureMutation({
-    onSuccess: (response) => {
-      toast.success('Saved');
-      setFieldValue(`steps.${index}.step`, response._id);
-      setFieldValue(`steps.${index}.order`, index + 1);
-    },
-  });
-
   const updateStepMutation = useUpdateStepMutation(`${workflowSchema?._id}`, {
     onSuccess: () => {
       toast.success('Saved');
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (selectId === WorkflowTypes.CHECKLIST) {
       const payload = {
@@ -113,10 +105,21 @@ const EditWorkflowField = ({
 
     if (selectId === WorkflowTypes.SIGN_DOCUMENT) {
       const formData = new FormData();
-      formData.append('title', data.title);
-      formData.append('overview', data.overview);
+      formData.append('title', data.title || '');
+      formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
-      signatureMutation.mutate(formData);
+
+      createSignature(formData)
+        .then((response) => {
+          if (response) {
+            toast.success('Success');
+            setFieldValue(`steps.${index}.step`, response.data._id);
+            setFieldValue(`steps.${index}.order`, index + 1);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.error);
+        });
     }
   };
 

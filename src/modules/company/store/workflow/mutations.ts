@@ -20,14 +20,6 @@ export const useCreateChecklistOrUploadMutation = (
     }
   );
 
-export const useCreateSignatureMutation = (
-  options: MutationOptions<undefined>
-) =>
-  useMutation<any, undefined>('onboarding-step/sign', api.postFile, {
-    onSuccess: options.onSuccess,
-    onError: options.onError,
-  });
-
 export const useCreateWorkflowMutation = (
   options: MutationOptions<undefined>
 ) =>
@@ -40,6 +32,7 @@ export const useUpdateStepMutation = (
   stepId: string,
   options: MutationOptions<undefined>
 ) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useMutation<any, undefined>(`onboarding-step/${stepId}`, api.put, {
     onSuccess: options.onSuccess,
     onError: options.onError,
@@ -51,6 +44,19 @@ export const useAddStepToWorkflowMutation = (
 ) =>
   useMutation<StepToWorkflowPayload, undefined>(
     `onboarding-workflow/add-step/${workflowId}`,
+    api.post,
+    {
+      onSuccess: options.onSuccess,
+      onError: options.onError,
+    }
+  );
+
+export const useAddStepToAssignedWorkflowMutation = (
+  workflowId: string,
+  options: MutationOptions<undefined>
+) =>
+  useMutation<StepToWorkflowPayload, undefined>(
+    `onboarding-workflow/assign/add-step/${workflowId}`,
     api.post,
     {
       onSuccess: options.onSuccess,

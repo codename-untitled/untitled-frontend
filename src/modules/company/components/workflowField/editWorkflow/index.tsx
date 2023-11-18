@@ -6,10 +6,10 @@ import {
   StepSchema,
   useAddStepToWorkflowMutation,
   useCreateChecklistOrUploadMutation,
-  useCreateSignatureMutation,
   useUpdateStepMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
+import { createSignature } from 'modules/company/store/workflow/customMutation';
 import FormField from 'modules/general/components/formComponents/formField';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -67,14 +67,6 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
     },
   });
 
-  const signatureMutation = useCreateSignatureMutation({
-    onSuccess: (response) => {
-      toast.success('Saved');
-      setFieldValue(`steps.${index}.step`, response._id);
-      setFieldValue(`steps.${index}.order`, index + 1);
-    },
-  });
-
   const updateStepMutation = useUpdateStepMutation(`${workflowSchema?._id}`, {
     onSuccess: () => {
       toast.success('Saved');
@@ -101,15 +93,31 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
         type: WorkflowTypes.UPLOAD_DOCUMENT,
         data,
       };
-      createChecklistorUplpoadMutation.mutate(payload);
+
+      if (workflowSchema) {
+        updateStepMutation.mutate(payload);
+      } else {
+        createChecklistorUplpoadMutation.mutate(payload);
+      }
     }
 
     if (selectId === WorkflowTypes.SIGN_DOCUMENT) {
       const formData = new FormData();
-      formData.append('title', data.title);
-      formData.append('overview', data.overview);
+      formData.append('title', data.title || '');
+      formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
-      signatureMutation.mutate(formData);
+
+      createSignature(formData)
+        .then((response) => {
+          if (response) {
+            toast.success('Success');
+            setFieldValue(`steps.${index}.step`, response.data._id);
+            setFieldValue(`steps.${index}.order`, index + 1);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.error);
+        });
     }
   };
 

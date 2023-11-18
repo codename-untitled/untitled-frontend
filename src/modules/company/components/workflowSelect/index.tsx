@@ -51,12 +51,6 @@ export default function WorkflowSelect({
       icon: require('assets/document-upload-purp.svg').default,
       type: WorkflowTypes.UPLOAD_DOCUMENT,
     },
-    {
-      id: 3,
-      name: 'Signature',
-      icon: require('assets/signicon.svg').default,
-      type: WorkflowTypes.SIGN_DOCUMENT,
-    },
   ];
 
   const signatureOptions = [
@@ -83,7 +77,7 @@ export default function WorkflowSelect({
   const [options, setOptions] = useState(defaultOptions);
 
   useEffect(() => {
-    if (location.pathname !== '/company/workflow/create') {
+    if (location.pathname.includes('/company/workflow/personalize')) {
       setOptions(signatureOptions);
     }
   }, []);
