@@ -52,7 +52,7 @@ const CreateWorkflow = () => {
           <Button label="Back" color="black" onClick={() => navigate(-1)} />
         </div>
         <h1 className="text-center text-[24px] font-semibold mt-3">
-          New Workflow
+          New Onboarding Workflow
         </h1>
         <p className="text-center text-[14px]">
           Create steps and assign to specific employee
@@ -101,17 +101,10 @@ const CreateWorkflow = () => {
                 />
               </div>
               <FieldArray name="steps">
-                {({ push, remove }) => (
+                {({ push }) => (
                   <div className="flex flex-col gap-10 mt-10" ref={stepsRef}>
                     {values.steps.map((_, index) => (
-                      <WorkflowField
-                        key={index}
-                        index={index}
-                        remove={remove}
-                        lastIndex={
-                          index !== 0 && index === values.steps.length - 1
-                        }
-                      />
+                      <WorkflowField key={index} index={index} />
                     ))}
                     <div className="flex gap-2">
                       <Button

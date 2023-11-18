@@ -12,6 +12,7 @@ import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
 import EditWorkflow from 'pages/company/workflow/edit';
+import PersonalizeWorkflow from 'pages/company/workflow/personalize';
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
             <Route path="workflow" element={<Workflow />} />
             <Route path="workflow/create" element={<CreateWorkflow />} />
             <Route path="workflow/edit/:id" element={<EditWorkflow />} />
+            <Route
+              path="workflow/personalize/:id"
+              element={<PersonalizeWorkflow />}
+            />
           </Route>
         </Route>
         <Route

@@ -87,7 +87,7 @@ const AddEmployee = ({ show, setShow, mutate }: AddEmployeeProps) => {
             <div className="flex w-[100%] gap-[30px] mt-[20px] max-md:flex-col">
               <div className="basis-[50%]">
                 <FormField
-                  label="Company email"
+                  label="Email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}

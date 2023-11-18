@@ -20,6 +20,7 @@ module.exports = {
       chartBlue: '#1EC1CB',
       navBlack: '#121212',
       green: '#0ADA76',
+      chartRed: '#ED5702',
     },
   },
   plugins: [],

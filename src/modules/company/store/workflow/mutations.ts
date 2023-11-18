@@ -5,6 +5,7 @@ import {
   ChecklistOrUploadPayload,
   SignaturePayload,
   StepToWorkflowPayload,
+  AssignWorkflowPayload,
   WorkflowPayload,
 } from './types';
 
@@ -51,6 +52,31 @@ export const useAddStepToWorkflowMutation = (
 ) =>
   useMutation<StepToWorkflowPayload, undefined>(
     `onboarding-workflow/add-step/${workflowId}`,
+    api.post,
+    {
+      onSuccess: options.onSuccess,
+      onError: options.onError,
+    }
+  );
+
+export const useDeleteWorkflowMutation = (
+  workflowId: string,
+  options: MutationOptions<undefined>
+) =>
+  useMutation<unknown, undefined>(
+    `onboarding-workflow/${workflowId}`,
+    api.delete,
+    {
+      onSuccess: options.onSuccess,
+      onError: options.onError,
+    }
+  );
+
+export const useAssignWorkflowMutation = (
+  options: MutationOptions<undefined>
+) =>
+  useMutation<AssignWorkflowPayload, undefined>(
+    'onboarding-workflow/assign',
     api.post,
     {
       onSuccess: options.onSuccess,

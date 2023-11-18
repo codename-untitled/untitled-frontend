@@ -108,3 +108,19 @@ export type WorkflowSchema = {
   overview: string;
   steps: WorkflowStep[];
 };
+
+export type DeleteAtom = {
+  fileName?: string;
+  showModal?: boolean;
+  workflowId?: string;
+};
+
+export type AssignWorkflowAtom = {
+  showModal?: boolean;
+  workflowId?: string;
+};
+
+export type AssignWorkflowPayload = {
+  workflowId: string;
+  employeeId: string;
+};

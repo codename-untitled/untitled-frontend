@@ -1,31 +1,42 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable no-underscore-dangle */
 import { Formik, useFormikContext } from 'formik';
 import {
+  StepSchema,
+  useAddStepToWorkflowMutation,
   useCreateChecklistOrUploadMutation,
   useCreateSignatureMutation,
+  useUpdateStepMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
 import FormField from 'modules/general/components/formComponents/formField';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 import WorkflowSelect from '../../workflowSelect';
 import Checklist from '../checklist';
 import Signature from '../signature';
-import { getInitialValue, getSchema } from './store';
 import Upload from '../upload';
+import { getInitialValue, getNewInitialValue, getSchema } from './store';
 
 type Props = {
   index: number;
+  workflowSchema: StepSchema;
+  remove: (index: number) => void;
+  lastIndex: boolean;
 };
 
-const WorkflowField = ({ index }: Props) => {
-  const [selectId, setSelectId] = useState<WorkflowTypes>(
-    WorkflowTypes.CHECKLIST
+const EditWorkflowField = ({
+  index,
+  workflowSchema,
+  remove,
+  lastIndex,
+}: Props) => {
+  const [selectId, setSelectId] = useState(
+    workflowSchema?.type ?? WorkflowTypes.CHECKLIST
   );
-
+  const params = useParams();
   const { setFieldValue } = useFormikContext();
 
   const getStepById = (id: string) => {
@@ -39,11 +50,27 @@ const WorkflowField = ({ index }: Props) => {
     }
   };
 
-  const createChecklistOrUploadmutation = useCreateChecklistOrUploadMutation({
+  const addStepToWorkflowMutation = useAddStepToWorkflowMutation(
+    `${params.id}`,
+    {
+      onSuccess: () => {
+        toast.success('Added to Workflow');
+      },
+    }
+  );
+
+  const createChecklistorUplpoadMutation = useCreateChecklistOrUploadMutation({
     onSuccess: (response) => {
       toast.success('Saved');
       setFieldValue(`steps.${index}.step`, response._id);
       setFieldValue(`steps.${index}.order`, index + 1);
+      if (!workflowSchema) {
+        const payload = {
+          stepId: response._id,
+          order: `${index + 1}`,
+        };
+        addStepToWorkflowMutation.mutate(payload);
+      }
     },
   });
 
@@ -55,13 +82,25 @@ const WorkflowField = ({ index }: Props) => {
     },
   });
 
+  const updateStepMutation = useUpdateStepMutation(`${workflowSchema?._id}`, {
+    onSuccess: () => {
+      toast.success('Saved');
+    },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (selectId === WorkflowTypes.CHECKLIST) {
       const payload = {
         type: WorkflowTypes.CHECKLIST,
         data,
       };
-      createChecklistOrUploadmutation.mutate(payload);
+
+      if (workflowSchema) {
+        updateStepMutation.mutate(payload);
+      } else {
+        createChecklistorUplpoadMutation.mutate(payload);
+      }
     }
 
     if (selectId === WorkflowTypes.UPLOAD_DOCUMENT) {
@@ -69,15 +108,14 @@ const WorkflowField = ({ index }: Props) => {
         type: WorkflowTypes.UPLOAD_DOCUMENT,
         data,
       };
-      createChecklistOrUploadmutation.mutate(payload);
+      createChecklistorUplpoadMutation.mutate(payload);
     }
 
     if (selectId === WorkflowTypes.SIGN_DOCUMENT) {
       const formData = new FormData();
-      formData.append('title', data.title || '');
-      formData.append('overview', data.overview || '');
+      formData.append('title', data.title);
+      formData.append('overview', data.overview);
       formData.append('docs', data.docs);
-
       signatureMutation.mutate(formData);
     }
   };
@@ -86,11 +124,27 @@ const WorkflowField = ({ index }: Props) => {
     <div>
       <div className="flex justify-between">
         <p>Step {index + 1}</p>
+        {lastIndex && (
+          <p
+            className="text-[14px] text-red-600 cursor-pointer"
+            onClick={() => remove(index)}
+          >
+            delete
+          </p>
+        )}
       </div>
       <div className="mt-4">
         <Formik
-          initialValues={getInitialValue(selectId)}
-          validationSchema={getSchema(selectId)}
+          initialValues={
+            workflowSchema?.type
+              ? getInitialValue(workflowSchema.type, workflowSchema?.data)
+              : getNewInitialValue(selectId)
+          }
+          validationSchema={
+            workflowSchema?.type
+              ? getSchema(workflowSchema.type)
+              : getSchema(selectId)
+          }
           onSubmit={onSubmit}
           enableReinitialize
         >
@@ -127,7 +181,11 @@ const WorkflowField = ({ index }: Props) => {
                     />
                   </div>
                   <div className="mt-[23px]">
-                    <WorkflowSelect setSelectId={setSelectId} allowStepChange />
+                    <WorkflowSelect
+                      setSelectId={setSelectId}
+                      workflowType={workflowSchema?.type}
+                      allowStepChange={!workflowSchema}
+                    />
                   </div>
                 </div>
                 <hr className="my-10" />
@@ -141,4 +199,4 @@ const WorkflowField = ({ index }: Props) => {
   );
 };
 
-export default WorkflowField;
+export default EditWorkflowField;

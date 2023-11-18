@@ -5,7 +5,7 @@ type ButtonProps = {
   label: string;
   onClick?: () => void;
   icon?: string;
-  color?: 'purple' | 'white' | 'black' | 'green';
+  color?: 'purple' | 'white' | 'black' | 'green' | 'red';
   size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit';
   className?: string;
@@ -33,6 +33,7 @@ function Button({
       ${color === 'black' && 'bg-black text-white'}
       ${color === 'green' && 'bg-green text-white'}
       ${color === 'white' && 'bg-white text-black'}
+      ${color === 'red' && 'bg-chartRed text-white'}
       ${disabled && 'bg-gray-200 cursor-not-allowed'}
       ${size === 'sm' && ' w-[92px]'}
       ${size === 'md' && ' w-[163px]'}

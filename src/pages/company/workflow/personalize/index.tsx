@@ -19,7 +19,7 @@ import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
 import EditWorkflowField from 'modules/company/components/workflowField/editWorkflow';
 import { schema } from './validation';
 
-const EditWorkflow = () => {
+const PersonalizeWorkflow = () => {
   const navigate = useNavigate();
   const params = useParams();
   const stepsRef = useRef<HTMLDivElement | null>(null);
@@ -152,10 +152,10 @@ const EditWorkflow = () => {
                           type="button"
                         />
                         <Button
-                          label="Done"
+                          label="Submit"
                           size="md"
                           color="purple"
-                          onClick={() => navigate(-1)}
+                          onClick={handleSubmit}
                           isLoading={isSubmitting}
                         />
                       </div>
@@ -175,4 +175,4 @@ const EditWorkflow = () => {
   );
 };
 
-export default EditWorkflow;
+export default PersonalizeWorkflow;

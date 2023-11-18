@@ -37,7 +37,10 @@ const Signature = () => {
           id="file-upload"
           onChange={handleFileChange}
         />
-        <label className="flex gap-1 cursor-pointer" htmlFor="file-upload">
+        <label
+          className="flex gap-1 cursor-pointer line-clamp-1"
+          htmlFor="file-upload"
+        >
           <img src={require('assets/document-upload.svg').default} alt="" />
           {fileName}
         </label>

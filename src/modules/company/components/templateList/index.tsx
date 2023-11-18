@@ -1,5 +1,5 @@
+/* eslint-disable no-underscore-dangle */
 import { WorkflowData } from 'modules/company/store/workflow';
-import React from 'react';
 import Template from '../template';
 
 type Props = {
