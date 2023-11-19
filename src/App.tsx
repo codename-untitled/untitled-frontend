@@ -12,7 +12,6 @@ import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuthCompany from 'modules/general/components/noAuth/noAuthCompany';
-import NoAuth from 'modules/general/components/noAuth';
 import EditWorkflow from 'pages/company/workflow/edit';
 import PersonalizeWorkflow from 'pages/company/workflow/personalize';
 import Employee from 'pages/employee';
