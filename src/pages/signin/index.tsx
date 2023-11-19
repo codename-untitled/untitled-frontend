@@ -53,10 +53,13 @@ const SignIn = () => {
   return (
     <div className="min-h-screen h-[100%] flex bg-offWhite max-lg:bg-purp max-lg:bg-cover max-[376px]:h-fit">
       <div className="basis-[55%] relative max-lg:basis-[100%]">
-        <Logo
-          color={isDesktopOrLaptop ? 'black' : 'white'}
-          className="ml-[10%] mt-5"
-        />
+        <div className="max-lg:flex max-lg:justify-center">
+          <Logo
+            color={isDesktopOrLaptop ? 'black' : 'white'}
+            className="ml-[10%] mt-5 w-[221px]"
+            onClick={() => navigate('/')}
+          />
+        </div>
         <div className="max-w-[510px] block mx-auto mt-[10vh] z-30 relative max-sm:px-10 max-sm:mt-[15%]">
           <div className="px-[10%] shadow-[1px_1px_0px_0px_#000] h-[478px] w-[510px] border-solid border-[0.5px] border-black bg-white rounded-md z-30 max-sm:h-full max-sm:w-full max-sm:pb-6">
             <p className="text-center text-[24px] font-bold mt-[30px]">

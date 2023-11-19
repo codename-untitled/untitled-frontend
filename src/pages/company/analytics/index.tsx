@@ -8,7 +8,7 @@ const Analytics = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="py-5 px-5 grid grid-cols-4 gap-x-10 gap-y-10 max-xl:grid-cols-3 max-[868px]:grid-cols-2 max-sm:grid-cols-1">
+    <div className="py-5 px-5 grid grid-cols-4 gap-x-10 gap-y-10 place-items-center max-xl:grid-cols-3 max-[868px]:grid-cols-2 max-sm:grid-cols-1">
       <Card
         number={employees.length}
         name="Total Employees"

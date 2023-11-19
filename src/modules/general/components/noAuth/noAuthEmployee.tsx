@@ -1,18 +1,10 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const NoAuth = () => {
+const NoAuthEmployee = () => {
   const navigate = useNavigate();
 
-  const companyToken = sessionStorage.getItem('companyToken');
-
   const employeeToken = sessionStorage.getItem('employeeToken');
-
-  useEffect(() => {
-    if (companyToken) {
-      navigate('/company');
-    }
-  }, [companyToken]);
 
   useEffect(() => {
     if (employeeToken) {
@@ -23,4 +15,4 @@ const NoAuth = () => {
   return <Outlet />;
 };
 
-export default NoAuth;
+export default NoAuthEmployee;

@@ -46,11 +46,10 @@ const EmployeeSignIn = () => {
 
       session.setData(employeeData);
       session.authorize(response.token);
+
       if (!response.employee.hasChangedPassword) {
-        // Redirect to the reset password page
         navigate('/employee/reset-password');
       } else {
-        // Redirect to the employee dashboard
         navigate('/employee');
       }
     },

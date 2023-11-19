@@ -11,22 +11,24 @@ import Profile from 'pages/company/profile';
 import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
-import NoAuth from 'modules/general/components/noAuth';
-import Employee from 'pages/employee';
+import NoAuthCompany from 'modules/general/components/noAuth/noAuthCompany';
 import EmployeeSignIn from 'pages/employee-signin';
 import ResetPassword from 'pages/reset-password';
 import EmployeeAuth from 'modules/general/components/employeeAuth';
+import Employee from 'pages/employee';
+import NoAuthEmployee from 'modules/general/components/noAuth/noAuthEmployee';
 
 function App() {
   return (
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route element={<NoAuth />}>
+        <Route element={<NoAuthCompany />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+        </Route>
+        <Route element={<NoAuthEmployee />}>
           <Route path="/employee/signin" element={<EmployeeSignIn />} />
-          <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
         <Route element={<CompanyAuth />}>
           <Route path="/company" element={<Company />}>
@@ -40,6 +42,7 @@ function App() {
         </Route>
         <Route element={<EmployeeAuth />}>
           <Route path="/employee" element={<Employee />} />
+          <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
         <Route
           path={'/*'}

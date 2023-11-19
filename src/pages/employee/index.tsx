@@ -49,7 +49,7 @@ const Employee = () => {
 
   return (
     <div className="min-h-screen bg-offWhite grid grid-rows-[max-content,1fr,max-content]">
-      <Logo color="black" className="mx-auto my-5" />
+      <Logo color="black" className="mx-auto my-5 w-[221px]" />
       <div className="px-[10%] py-[5%]">
         {!isComplete ? (
           <>
