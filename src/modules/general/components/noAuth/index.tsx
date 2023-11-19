@@ -4,13 +4,21 @@ import { Outlet, useNavigate } from 'react-router-dom';
 const NoAuth = () => {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('companyToken');
+  const companyToken = sessionStorage.getItem('companyToken');
+
+  const employeeToken = sessionStorage.getItem('employeeToken');
 
   useEffect(() => {
-    if (token) {
+    if (companyToken) {
       navigate('/company');
     }
-  }, [token]);
+  }, [companyToken]);
+
+  useEffect(() => {
+    if (employeeToken) {
+      navigate('/employee');
+    }
+  }, [employeeToken]);
 
   return <Outlet />;
 };
