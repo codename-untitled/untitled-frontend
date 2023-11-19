@@ -1,15 +1,20 @@
-import { useAtom } from 'jotai';
-import { EmployeeSessionAtom } from 'modules/general/store/auth';
+import { api } from 'lib/api';
+import { useEffect } from 'react';
 import { useLocation, Outlet, Navigate } from 'react-router-dom';
 
 const EmployeeAuth = () => {
-  const [auth] = useAtom(EmployeeSessionAtom);
   const location = useLocation();
 
-  return auth?.isAuthenticated ? (
+  const token = sessionStorage.getItem('employeeToken');
+
+  useEffect(() => {
+    api.authorize(token);
+  }, [token]);
+
+  return token ? (
     <Outlet />
   ) : (
-    <Navigate to="/signin" state={{ from: location }} replace />
+    <Navigate to="/employee/signin" state={{ from: location }} replace />
   );
 };
 

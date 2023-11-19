@@ -6,6 +6,7 @@ type ButtonProps = {
   onClick?: () => void;
   icon?: string;
   color?: 'purple' | 'white' | 'black' | 'green' | 'red';
+  iconPosition?: 'left' | 'right';
   size?: 'sm' | 'md' | 'lg';
   type?: 'button' | 'submit';
   className?: string;
@@ -18,6 +19,7 @@ function Button({
   onClick,
   isLoading,
   icon,
+  iconPosition = 'left',
   color = 'purple',
   size = 'sm',
   type = 'button',
@@ -46,8 +48,9 @@ function Button({
         <Spinner size="small" color={color} />
       ) : (
         <>
-          {icon && <img src={icon} alt="icon" />}
+          {icon && iconPosition === 'left' && <img src={icon} alt="icon" />}
           {label}
+          {icon && iconPosition === 'right' && <img src={icon} alt="icon" />}
         </>
       )}
     </button>

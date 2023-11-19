@@ -13,6 +13,10 @@ import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
 import EditWorkflow from 'pages/company/workflow/edit';
 import PersonalizeWorkflow from 'pages/company/workflow/personalize';
+import Employee from 'pages/employee';
+import EmployeeSignIn from 'pages/employee-signin';
+import ResetPassword from 'pages/reset-password';
+import EmployeeAuth from 'modules/general/components/employeeAuth';
 
 function App() {
   return (
@@ -22,6 +26,8 @@ function App() {
         <Route element={<NoAuth />}>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/employee/signin" element={<EmployeeSignIn />} />
+          <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
         <Route element={<CompanyAuth />}>
           <Route path="/company" element={<Company />}>
@@ -36,6 +42,9 @@ function App() {
               element={<PersonalizeWorkflow />}
             />
           </Route>
+        </Route>
+        <Route element={<EmployeeAuth />}>
+          <Route path="/employee" element={<Employee />} />
         </Route>
         <Route
           path={'/*'}

@@ -1,7 +1,11 @@
 import { useMutation } from 'hooks/useMutation';
 import { api } from 'lib/api';
 import { MutationOptions } from '../types';
-import { CompanySignUpPayload, SignInPayload } from './types';
+import {
+  ChangePasswordPayload,
+  CompanySignUpPayload,
+  SignInPayload,
+} from './types';
 
 export const useCompanySignupMutation = (options: MutationOptions<undefined>) =>
   useMutation<CompanySignUpPayload, undefined>('companies/register', api.post, {
@@ -17,3 +21,25 @@ export const useCompanySignInMutation = (options: MutationOptions<undefined>) =>
     onError: options.onError,
     extra: options.extra,
   });
+
+export const useEmployeeSignInMutation = (
+  options: MutationOptions<undefined>
+) =>
+  useMutation<SignInPayload, undefined>('employees/login', api.post, {
+    onSuccess: (response, key) => options.onSuccess(response, key),
+    onError: options.onError,
+    extra: options.extra,
+  });
+
+export const useChangePasswordMutation = (
+  options: MutationOptions<undefined>
+) =>
+  useMutation<ChangePasswordPayload, undefined>(
+    'employees/reset-password',
+    api.post,
+    {
+      onSuccess: (response, key) => options.onSuccess(response, key),
+      onError: options.onError,
+      extra: options.extra,
+    }
+  );
