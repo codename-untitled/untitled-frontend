@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
+import Logo from 'modules/general/components/logo';
 
 type MobileNavbarProps = {
   navbarLinks: NavbarLink[];
@@ -44,11 +45,7 @@ const MobileNavbar = ({
         ref={container}
       >
         <div className="flex flex-col items-center mt-5 gap-36 relative">
-          <img
-            src={require('assets/Untitled team logo 2.svg').default}
-            alt=""
-            className="h-10 w-16"
-          />
+          <Logo className="w-[140px] mr-auto mx-[10%]" />
           <div className="flex flex-col gap-16">
             {navbarLinks.map(({ name, route, activeIcon, inactiveIcon }) => (
               <NavLink

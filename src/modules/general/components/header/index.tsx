@@ -1,5 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../logo';
 import Button from '../buttons/button';
 
 const Header = () => {
@@ -11,7 +12,7 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center px-[5%] py-4 border-b-[0.5px] border-black border-solid">
-      <h1 className="text-[30px] font-extrabold text-[#353535]">ONBOARDER</h1>
+      <Logo color="black" />
       <div className="flex gap-5">
         <Button
           label="Login"

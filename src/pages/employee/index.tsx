@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import Logo from 'modules/general/components/logo';
 import Welcome from 'modules/employee/components/welcome';
 import StepTwo from 'modules/employee/components/stepTwo';
 import StepThree from 'modules/employee/components/stepThree';
@@ -48,9 +49,9 @@ const Employee = () => {
 
   return (
     <div className="min-h-screen bg-offWhite grid grid-rows-[max-content,1fr,max-content]">
-      <h1 className="px-[5%] py-4 border-b-[0.5px] border-black border-solid text-[30px] font-extrabold text-[#353535] text-center">
-        ONBOARDER
-      </h1>
+      <div className="border-b border-solid border-black flex justify-center">
+        <Logo color="black" className="mx-auto my-5 w-[221px]" />
+      </div>
       <div className="px-[10%] py-[5%]">
         {!isComplete ? (
           <>
