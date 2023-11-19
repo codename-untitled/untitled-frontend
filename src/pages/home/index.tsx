@@ -48,24 +48,24 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="self-center justify-self-center w-3/4 xl:w-4/5 max-lg:my-[calc(64px+10vw)] max-lg:max-w-[500px] lg:flex lg:justify-center">
-        <div className="w-full lg:w-max relative z-10 before:absolute before:-z-10 before:inset-0 before:m-auto before:w-[95%] before:pt-[95%] before:border before:border-dashed before:border-chartPurple before:rounded-full after:absolute after:-z-10 after:top-0 after:-left-[5%] after:bottom-0 after:m-auto after:w-[110%] after:pt-[110%] after:border after:border-dashed after:border-chartPurple after:rounded-full">
-          <img
-            src={require('assets/analytics-screenshot.png')}
-            alt="onboarder analytics page"
-            className="w-full h-auto object-cover"
-          />
-          <img
-            src={require('assets/regular-orange-star.svg').default}
-            alt="star icon"
-            className="absolute -top-[16%] left-[23.5%]"
-          />
-          <img
-            src={require('assets/big-purple-star.svg').default}
-            alt="star icon"
-            className="absolute -top-[16%] -right-[5%] -z-10"
-          />
+        <div className="self-center justify-self-center w-3/4 xl:w-4/5 max-lg:my-[calc(64px+10vw)] max-lg:max-w-[500px] lg:flex lg:justify-center">
+          <div className="w-full lg:w-max relative z-10 before:absolute before:-z-10 before:inset-0 before:m-auto before:w-[95%] before:pt-[95%] before:border before:border-dashed before:border-chartPurple before:rounded-full after:absolute after:-z-10 after:top-0 after:-left-[5%] after:bottom-0 after:m-auto after:w-[110%] after:pt-[110%] after:border after:border-dashed after:border-chartPurple after:rounded-full">
+            <img
+              src={require('assets/analytics-screenshot.png')}
+              alt="onboarder analytics page"
+              className="w-full h-auto object-cover"
+            />
+            <img
+              src={require('assets/regular-orange-star.svg').default}
+              alt="star icon"
+              className="absolute -top-[16%] left-[23.5%]"
+            />
+            <img
+              src={require('assets/big-purple-star.svg').default}
+              alt="star icon"
+              className="absolute -top-[16%] -right-[5%] -z-10"
+            />
+          </div>
         </div>
       </div>
       <Footer />
