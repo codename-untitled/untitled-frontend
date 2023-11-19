@@ -8,15 +8,15 @@ import { FieldArray, Formik } from 'formik';
 import { flushSync } from 'react-dom';
 import { useRef } from 'react';
 import {
+  useAssignedGetWorkflowDetails,
   useCreateWorkflowMutation,
-  useGetWorkflowDetails,
   WorkflowPayload,
 } from 'modules/company/store/workflow';
 import toast from 'react-hot-toast';
 import { FormikStateContextError } from 'helpers/context-error';
 import { useParams, useNavigate } from 'react-router-dom';
 import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
-import EditWorkflowField from 'modules/company/components/workflowField/editWorkflow';
+import PersonalizeWorkflowField from 'modules/company/components/workflowField/personalizeWorflow';
 import { schema } from './validation';
 
 const PersonalizeWorkflow = () => {
@@ -24,7 +24,7 @@ const PersonalizeWorkflow = () => {
   const params = useParams();
   const stepsRef = useRef<HTMLDivElement | null>(null);
 
-  const { data: workflowSchema, isLoading } = useGetWorkflowDetails(
+  const { data: workflowSchema, isLoading } = useAssignedGetWorkflowDetails(
     params.id as string
   );
 
@@ -137,7 +137,7 @@ const PersonalizeWorkflow = () => {
                   <div>
                     <div className="flex flex-col gap-10 mt-10" ref={stepsRef}>
                       {values?.steps.map((_: unknown, index: number) => (
-                        <EditWorkflowField
+                        <PersonalizeWorkflowField
                           index={index}
                           key={index}
                           workflowSchema={workflowSchema.steps[index]?.step}
@@ -152,10 +152,11 @@ const PersonalizeWorkflow = () => {
                           type="button"
                         />
                         <Button
-                          label="Submit"
+                          label="Done"
                           size="md"
                           color="purple"
-                          onClick={handleSubmit}
+                          type="button"
+                          onClick={() => navigate(-1)}
                           isLoading={isSubmitting}
                         />
                       </div>

@@ -24,16 +24,9 @@ import { getInitialValue, getNewInitialValue, getSchema } from './store';
 type Props = {
   index: number;
   workflowSchema: StepSchema;
-  remove: (index: number) => void;
-  lastIndex: boolean;
 };
 
-const EditWorkflowField = ({
-  index,
-  workflowSchema,
-  remove,
-  lastIndex,
-}: Props) => {
+const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
   const [selectId, setSelectId] = useState(
     workflowSchema?.type ?? WorkflowTypes.CHECKLIST
   );
@@ -127,14 +120,6 @@ const EditWorkflowField = ({
     <div>
       <div className="flex justify-between">
         <p>Step {index + 1}</p>
-        {lastIndex && (
-          <p
-            className="text-[14px] text-red-600 cursor-pointer"
-            onClick={() => remove(index)}
-          >
-            delete
-          </p>
-        )}
       </div>
       <div className="mt-4">
         <Formik
@@ -202,4 +187,4 @@ const EditWorkflowField = ({
   );
 };
 
-export default EditWorkflowField;
+export default PersonalizeWorkflowField;

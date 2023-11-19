@@ -120,6 +120,11 @@ export type AssignWorkflowAtom = {
   workflowId?: string;
 };
 
+export type PersonalizedWorkflowAtom = {
+  showModal?: boolean;
+  assignedWorkflowId?: string;
+};
+
 export type AssignWorkflowPayload = {
   workflowId: string;
   employeeId: string;

@@ -7,6 +7,7 @@ import { useGetWorkflows } from 'modules/company/store/workflow/queries';
 import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
 import DeleteModal from 'modules/company/components/modals/deleteModal';
 import AssignWorkflowModal from 'modules/company/components/modals/assignWorkflowModal';
+import PersonalizeModal from 'modules/company/components/modals/personalizeModal';
 
 const Workflow = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Workflow = () => {
     <div className="mx-[5%]">
       <DeleteModal />
       <AssignWorkflowModal />
+      <PersonalizeModal />
       <div className="flex justify-between mt-[30px]">
         <h1 className="text-[20px] font-normal">Templates</h1>
         <Button

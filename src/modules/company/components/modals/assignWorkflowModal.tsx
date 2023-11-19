@@ -6,11 +6,13 @@ import { useAtom } from 'jotai';
 import { Employee, useGetEmployees } from 'modules/company/store/employees';
 import {
   assignWorkflowAtom,
+  personalizeWorkflowAtom,
   useAssignWorkflowMutation,
 } from 'modules/company/store/workflow';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const AssignWorkflowModal = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,10 +23,23 @@ const AssignWorkflowModal = () => {
   const [assignWorkflowState, setAssignWorkflowState] =
     useAtom(assignWorkflowAtom);
 
+  const [, setPersonalizeState] = useAtom(personalizeWorkflowAtom);
+
   const { data: employees, isLoading } = useGetEmployees();
 
   const mutation = useAssignWorkflowMutation({
-    onSuccess: () => {},
+    onSuccess: (response) => {
+      toast.success('success');
+
+      setAssignWorkflowState({
+        showModal: false,
+      });
+
+      setPersonalizeState({
+        showModal: true,
+        assignedWorkflowId: response.assignedWorkflow,
+      });
+    },
   });
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

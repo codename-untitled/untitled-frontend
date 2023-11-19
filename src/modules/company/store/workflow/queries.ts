@@ -16,3 +16,12 @@ export function useGetWorkflowDetails(workflowId: string) {
 
   return workflows;
 }
+
+export function useAssignedGetWorkflowDetails(workflowId: string) {
+  const workflows = useQuery<WorkflowSchema>(
+    `onboarding-workflow/assign/${workflowId}`,
+    api.get
+  );
+
+  return workflows;
+}
