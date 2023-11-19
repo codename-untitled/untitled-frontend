@@ -17,6 +17,7 @@ import ResetPassword from 'pages/reset-password';
 import EmployeeAuth from 'modules/general/components/employeeAuth';
 import Employee from 'pages/employee';
 import NoAuthEmployee from 'modules/general/components/noAuth/noAuthEmployee';
+import NotFound from 'pages/not-found';
 
 function App() {
   return (
@@ -44,10 +45,7 @@ function App() {
           <Route path="/employee" element={<Employee />} />
           <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
-        <Route
-          path={'/*'}
-          element={<h1 className="text-center mt-4">404: Not Found</h1>}
-        />
+        <Route path={'/*'} element={<NotFound />} />
       </Routes>
     </ScrollToTop>
   );
