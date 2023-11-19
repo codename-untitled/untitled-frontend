@@ -4,6 +4,7 @@ import { Turn as Hamburger } from 'hamburger-react';
 import Avatar from '@mui/material/Avatar';
 import Logo from 'modules/general/components/logo';
 import MobileNavbar from 'modules/company/components/mobileNavbar';
+import ProfileDropdown from 'modules/company/components/profileDropdown';
 
 export type NavbarLink = {
   name: string;
@@ -17,6 +18,7 @@ const Company = () => {
   const routeSegments = location.pathname.split('/').filter(Boolean); // Used to get all routes after the slash as an array
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [profileDropdownIsOpen, setProfileDropdown] = useState<boolean>(false);
 
   const navbarLinks: NavbarLink[] = [
     {
@@ -125,14 +127,21 @@ const Company = () => {
                 {routeSegments[1] ?? 'Analytics'}
               </p>
             </div>
-            <div className="mt-2 flex gap-2 items-center">
+            <button
+              className="mt-2 flex gap-2 items-center relative"
+              type="button"
+              onClick={() => setProfileDropdown(!profileDropdownIsOpen)}
+            >
               <Avatar />
               <p className="text-sm max-sm:hidden">Untitled Company</p>
               <img
                 src={require('assets/arrow-down.svg').default}
                 alt="arrow-down-icon"
               />
-            </div>
+              {profileDropdownIsOpen && (
+                <ProfileDropdown className="absolute top-[100%] right-0" />
+              )}
+            </button>
           </div>
         </div>
         <Outlet />
