@@ -2,19 +2,20 @@ import FormField from 'modules/general/components/formComponents/formField';
 import Button from 'modules/general/components/buttons/button';
 import { Avatar } from '@mui/material';
 import {
-  ResetCompanyProfile,
-  useEditEmployeeMutation,
+  ResetCompanyPassword,
+  useResetCompanyPasswordMutation,
   useGetCompanyDetails,
 } from 'modules/company/store/profile';
 import SpinnerLoader from 'modules/general/components/spinner/spinnerLoader';
 import { Formik } from 'formik';
 import toast from 'react-hot-toast';
+import { FormikStateContextError } from 'helpers/context-error';
 import { schema } from './validation';
 
 const Profile = () => {
   const { data: company, isLoading } = useGetCompanyDetails();
 
-  const mutation = useEditEmployeeMutation({
+  const mutation = useResetCompanyPasswordMutation({
     onSuccess: () => {
       toast.success('Password Changed');
     },
@@ -30,7 +31,7 @@ const Profile = () => {
     );
   }
 
-  const onSubmit = (formData: ResetCompanyProfile) => {
+  const onSubmit = (formData: ResetCompanyPassword) => {
     mutation.mutate(formData);
   };
 
@@ -141,6 +142,10 @@ const Profile = () => {
                 touched={touched.confirmNewPassword}
               />
             </div>
+            <FormikStateContextError
+              mutation={mutation}
+              toasterId="reset-company-password"
+            />
             <Button
               label="Change Password"
               className="mt-10 px-8 py-[14px] w-max h-max"

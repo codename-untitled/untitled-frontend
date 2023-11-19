@@ -6,7 +6,7 @@ export type CompanyProfile = {
   taxId: string;
 };
 
-export type ResetCompanyProfile = {
+export type ResetCompanyPassword = {
   oldPassword: string;
   newPassword: string;
 };
