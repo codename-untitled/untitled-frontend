@@ -88,7 +88,7 @@ const PersonalizeWorkflow = () => {
           <Button label="Back" color="black" onClick={() => navigate(-1)} />
         </div>
         <h1 className="text-center text-[24px] font-semibold mt-3">
-          Edit Onboarding Workflow
+          Personalize Onboarding Workflow
         </h1>
         <p className="text-center text-[14px]">
           Create steps and assign to specific employee

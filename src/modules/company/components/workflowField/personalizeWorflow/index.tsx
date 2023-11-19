@@ -93,7 +93,12 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
         type: WorkflowTypes.UPLOAD_DOCUMENT,
         data,
       };
-      createChecklistorUplpoadMutation.mutate(payload);
+
+      if (workflowSchema) {
+        updateStepMutation.mutate(payload);
+      } else {
+        createChecklistorUplpoadMutation.mutate(payload);
+      }
     }
 
     if (selectId === WorkflowTypes.SIGN_DOCUMENT) {
