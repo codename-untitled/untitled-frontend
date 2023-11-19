@@ -2,15 +2,25 @@ import Step from '../step';
 import FileInput from '../fileInput';
 
 interface StepFourProps {
-  onBackClick: () => void;
-  onCompleteClick: () => void;
+  onBackClick?: () => void;
+  onCompleteClick?: () => void;
+  onProceedClick?: () => void;
+  hasBackButton?: boolean;
+  hasProceedButton?: boolean;
 }
-const StepFour = ({ onBackClick, onCompleteClick }: StepFourProps) => (
+const StepFour = ({
+  onBackClick,
+  onCompleteClick,
+  onProceedClick,
+  hasProceedButton,
+  hasBackButton,
+}: StepFourProps) => (
   <Step
-    hasBackButton
-    hasCompleteButton
+    hasProceedButton={hasProceedButton}
+    hasBackButton={hasBackButton}
     onBackClick={onBackClick}
     onCompleteClick={onCompleteClick}
+    onProceedClick={onProceedClick}
   >
     <h1 className="mb-7 text-black text-[40px] font-bold">Title</h1>
     <p className="px-9 pb-5 border-b border-solid border-grey text-sm font-normal text-center max-w-2xl">

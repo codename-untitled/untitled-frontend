@@ -1,14 +1,21 @@
 import Step from '../step';
 
 interface StepTwoProps {
-  onBackClick: () => void;
-  onProceedClick: () => void;
+  onBackClick?: () => void;
+  onProceedClick?: () => void;
+  hasBackButton?: boolean;
+  hasProceedButton?: boolean;
 }
 
-const StepTwo = ({ onBackClick, onProceedClick }: StepTwoProps) => (
+const StepTwo = ({
+  onBackClick,
+  onProceedClick,
+  hasBackButton,
+  hasProceedButton,
+}: StepTwoProps) => (
   <Step
-    hasBackButton
-    hasProceedButton
+    hasBackButton={hasBackButton}
+    hasProceedButton={hasProceedButton}
     onBackClick={onBackClick}
     onProceedClick={onProceedClick}
   >

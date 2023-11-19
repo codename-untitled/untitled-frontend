@@ -2,13 +2,20 @@ import Step from '../step';
 import FileInput from '../fileInput';
 
 interface StepThreeProps {
-  onBackClick: () => void;
-  onProceedClick: () => void;
+  onBackClick?: () => void;
+  onProceedClick?: () => void;
+  hasBackButton?: boolean;
+  hasProceedButton?: boolean;
 }
-const StepThree = ({ onBackClick, onProceedClick }: StepThreeProps) => (
+const StepThree = ({
+  onBackClick,
+  onProceedClick,
+  hasBackButton,
+  hasProceedButton,
+}: StepThreeProps) => (
   <Step
-    hasBackButton
-    hasProceedButton
+    hasBackButton={hasBackButton}
+    hasProceedButton={hasProceedButton}
     onBackClick={onBackClick}
     onProceedClick={onProceedClick}
   >
