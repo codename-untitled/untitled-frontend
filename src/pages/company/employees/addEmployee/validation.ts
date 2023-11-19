@@ -15,5 +15,9 @@ export const schema = Yup.object().shape({
   jobTitle: Yup.string().required('job title is required'),
   password: Yup.string()
     .required('Password is required')
-    .min(8, 'Password should contain 8 characters'),
+    .min(8, 'Password should contain 8 characters')
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+      'password must contain one number and one special character.'
+    ),
 });
