@@ -3,12 +3,22 @@ import React from 'react';
 type A = React.InputHTMLAttributes<HTMLInputElement>;
 
 interface Props extends A {
-  label: string;
+  label?: string;
   errors?: string;
   touched?: boolean;
   className?: string;
+  inputSize?: 'sm' | 'md';
+  disabled?: boolean;
 }
-function FormField({ label, className, errors, touched, ...rest }: Props) {
+function FormField({
+  label,
+  className,
+  errors,
+  touched,
+  inputSize = 'md',
+  disabled,
+  ...rest
+}: Props) {
   return (
     <div className="flex flex-col gap-[2px]">
       <label className="text-[14px] font-light" htmlFor={label}>
@@ -16,7 +26,11 @@ function FormField({ label, className, errors, touched, ...rest }: Props) {
       </label>
       <input
         {...rest}
-        className={`shadow-[1px_1px_0px_0px_#000] h-[50px] border-solid border-[0.5px] border-black bg-white rounded-md pl-2 text-[14px] ${className}`}
+        className={`shadow-[1px_1px_0px_0px_#000]  border-solid border-[0.5px] border-black bg-white rounded-md pl-2 text-[14px]
+        focus:outline-chartPurple focus:border-none
+        ${inputSize === 'sm' && 'h-[32px]'}
+        ${inputSize === 'md' && 'h-[50px]'}
+        ${className}`}
       />
       {touched && errors && (
         <p className="text-[12px] text-red-600 ml-2">{errors}</p>

@@ -11,6 +11,8 @@ import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
+import EditWorkflow from 'pages/company/workflow/edit';
+import PersonalizeWorkflow from 'pages/company/workflow/personalize';
 import Employee from 'pages/employee';
 import EmployeeSignIn from 'pages/employee-signin';
 import ResetPassword from 'pages/reset-password';
@@ -34,6 +36,11 @@ function App() {
             <Route path="employee" element={<CompanyEmployees />} />
             <Route path="workflow" element={<Workflow />} />
             <Route path="workflow/create" element={<CreateWorkflow />} />
+            <Route path="workflow/edit/:id" element={<EditWorkflow />} />
+            <Route
+              path="workflow/personalize/:id"
+              element={<PersonalizeWorkflow />}
+            />
           </Route>
         </Route>
         <Route element={<EmployeeAuth />}>
