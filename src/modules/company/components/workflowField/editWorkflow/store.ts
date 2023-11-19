@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { WorkflowTypes } from 'modules/company/store/workflow';
 import { checklistSchema, signatureSchema, uploadSchema } from '../validation';
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable operator-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useFormikContext } from 'formik';
