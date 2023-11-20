@@ -68,7 +68,7 @@ const Upload = () => {
                 size="md"
                 onClick={() => push(documentValues)}
               />
-              <Button label="Save" color="green" onClick={handleSubmit} />
+              <Button label="Create" color="green" onClick={handleSubmit} />
             </div>
           </div>
         )}

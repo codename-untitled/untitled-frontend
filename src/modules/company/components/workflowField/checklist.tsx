@@ -70,7 +70,7 @@ const Checklist = () => {
                   size="md"
                   onClick={() => push(checklistValues)}
                 />
-                <Button label="Save" color="green" onClick={handleSubmit} />
+                <Button label="Create" color="green" onClick={handleSubmit} />
               </div>
             </div>
           )}

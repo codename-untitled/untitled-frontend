@@ -54,7 +54,7 @@ const Signature = ({ workflowSchema }: Props) => {
       )}
       <p className="flex justify-end text-[12px] mt-1">Max size 5mb</p>
       <div>
-        <Button label="Save" color="green" onClick={handleSubmit} />
+        <Button label="Create" color="green" onClick={handleSubmit} />
       </div>
     </div>
   );
