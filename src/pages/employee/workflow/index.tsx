@@ -1,17 +1,29 @@
 /* eslint-disable no-underscore-dangle */
-import StepFour from 'modules/employee/components/stepFour';
+import Sign from 'modules/employee/components/sign';
 import StepsComplete from 'modules/employee/components/stepsComplete';
-import StepThree from 'modules/employee/components/stepThree';
-import StepTwo from 'modules/employee/components/stepTwo';
+import Upload from 'modules/employee/components/upload';
+import Checklist from 'modules/employee/components/checklist';
 import { Fragment, useState } from 'react';
-import { steps } from './mock';
+import Footer from 'modules/general/components/footer';
+import {
+  CheckListType,
+  SignDocumentType,
+  UploadDocumentType,
+  useAssignedGetWorkflowDetails,
+} from 'modules/employee/store';
+import { useParams } from 'react-router-dom';
+import { steps } from '../mock';
 
-const EmployeeTest = () => {
+const EmployeeWorkflow = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
+
+  const params = useParams();
 
   const changeActiveStep = (step: number) => {
     setActiveStep(step);
   };
+
+  const { data: workflow } = useAssignedGetWorkflowDetails(params.id as string);
 
   return (
     <div className="min-h-screen bg-offWhite grid grid-rows-[max-content,1fr,max-content]">
@@ -55,30 +67,33 @@ const EmployeeTest = () => {
             switch (type) {
               case 'CheckList':
                 return (
-                  <StepTwo
+                  <Checklist
                     onBackClick={() => changeActiveStep(activeStep - 1)}
                     onProceedClick={() => changeActiveStep(activeStep + 1)}
                     hasProceedButton={hasProceedButton}
                     hasBackButton={hasBackButton}
                     key={step._id}
+                    data={data as CheckListType}
                   />
                 );
               case 'UploadDocument':
                 return (
-                  <StepThree
+                  <Upload
                     onBackClick={() => changeActiveStep(activeStep - 1)}
                     onProceedClick={() => changeActiveStep(activeStep + 1)}
                     hasProceedButton={hasProceedButton}
                     hasBackButton={hasBackButton}
                     key={step._id}
+                    data={data as UploadDocumentType}
                   />
                 );
               case 'SignDocuments':
                 return (
-                  <StepFour
+                  <Sign
                     onBackClick={() => changeActiveStep(activeStep - 1)}
                     onProceedClick={() => changeActiveStep(activeStep + 1)}
                     key={step._id}
+                    data={data as SignDocumentType}
                   />
                 );
               default:
@@ -87,8 +102,9 @@ const EmployeeTest = () => {
           })}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
 
-export default EmployeeTest;
+export default EmployeeWorkflow;

@@ -21,6 +21,7 @@ export const EmployeeSessionAtom = atom<EmployeeSession | null>({
   role: '',
   email: '',
   phoneNumber: '',
+  assignedWorkflow: '',
   address: '',
   hasChangedPassword: false,
   token: '',

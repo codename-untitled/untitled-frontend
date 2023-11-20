@@ -2,15 +2,20 @@ import { useState } from 'react';
 
 interface FileInputProps {
   className?: string;
+  label?: string;
 }
 
-const FileInput = ({ className }: FileInputProps) => {
-  const label = 'Add file or drop file here';
+const FileInput = ({ className, label }: FileInputProps) => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    setFile(selectedFile || null);
+    const fileInput = event.target;
+
+    if (fileInput.files && fileInput.files.length > 0) {
+      const selectedFile = fileInput.files[0];
+      setFile(selectedFile);
+      // setFieldValue('docs', selectedFile);
+    }
   };
 
   return (
@@ -18,7 +23,7 @@ const FileInput = ({ className }: FileInputProps) => {
       <div className="flex gap-x-2.5 items-center">
         <label
           htmlFor={label}
-          className="py-5 px-40 border border-solid border-black shadow-[1px_1px_0_0_#000] rounded-md bg-white flex gap-x-2 items-center justify-center w-full cursor-pointer"
+          className="py-5 border border-solid border-black shadow-[1px_1px_0_0_#000] rounded-md bg-white flex gap-x-2 items-center justify-center w-[400px] cursor-pointer"
         >
           <img
             src={require('assets/paper-clip.svg').default}

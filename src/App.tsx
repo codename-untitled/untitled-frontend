@@ -11,10 +11,11 @@ import SignUp from 'pages/signup';
 import SignIn from 'pages/signin';
 import CompanyAuth from 'modules/general/components/companyAuth';
 import NoAuth from 'modules/general/components/noAuth';
-import Employee from 'pages/employee';
 import EmployeeSignIn from 'pages/employee-signin';
 import ResetPassword from 'pages/reset-password';
 import EmployeeAuth from 'modules/general/components/employeeAuth';
+import Employee from 'pages/employee';
+import EmployeeWorkflow from 'pages/employee/workflow';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         </Route>
         <Route element={<EmployeeAuth />}>
           <Route path="/employee" element={<Employee />} />
+          <Route path="/employee/:id" element={<EmployeeWorkflow />} />
         </Route>
         <Route
           path={'/*'}

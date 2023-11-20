@@ -15,6 +15,7 @@ export type EmployeeSession = {
   lastName: string;
   department: string;
   jobTitle: string;
+  assignedWorkflow: string;
   role: string;
   email: string;
   phoneNumber: string;
