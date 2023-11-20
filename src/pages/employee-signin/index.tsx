@@ -36,6 +36,7 @@ const EmployeeSignIn = () => {
         department: response.employee.department,
         jobTitle: response.employee.jobTitle,
         role: response.employee.role,
+        assignedWorkflow: response.employee.assignedWorkflow,
         email: response.employee.email,
         phoneNumber: response.employee.phoneNumber,
         address: response.employee.address,

@@ -111,8 +111,13 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
         .then((response) => {
           if (response) {
             toast.success('Success');
-            setFieldValue(`steps.${index}.step`, response.data._id);
-            setFieldValue(`steps.${index}.order`, index + 1);
+
+            const payload = {
+              stepId: response.data._id,
+              order: `${index + 1}`,
+            };
+
+            addStepToWorkflowMutation.mutate(payload);
           }
         })
         .catch((err) => {
