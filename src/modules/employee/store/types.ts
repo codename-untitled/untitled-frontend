@@ -1,3 +1,5 @@
+import { WorkflowTypes } from 'modules/company/store/workflow';
+
 type StepItemType = {
   label: string;
   completed: boolean;
@@ -6,31 +8,35 @@ type StepItemType = {
 
 export type CheckListType = {
   _id: string;
+  data: {
+    _id: string;
+    title: string;
+    overview: string;
+    items: StepItemType[];
+  };
+  type: WorkflowTypes.CHECKLIST;
+};
+
+export type Documents = {
   title: string;
   overview: string;
-  items: StepItemType[];
+  documents: {
+    name: string;
+    url: string;
+    _id: string;
+  }[];
 };
 
 export type UploadDocumentType = {
   _id: string;
-  title: string;
-  overview: string;
-  documents: {
-    name: string;
-    url: string;
-    _id: string;
-  }[];
+  type: WorkflowTypes.UPLOAD_DOCUMENT;
+  data: Documents;
 };
 
 export type SignDocumentType = {
   _id: string;
-  title: string;
-  overview: string;
-  documents: {
-    name: string;
-    url: string;
-    _id: string;
-  }[];
+  type: WorkflowTypes.SIGN_DOCUMENT;
+  data: Documents;
 };
 
 type StepType = {

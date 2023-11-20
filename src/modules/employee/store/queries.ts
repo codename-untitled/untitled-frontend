@@ -1,6 +1,6 @@
 import { useQuery } from 'hooks/useQuery';
 import { api } from 'lib/api';
-import { Employee } from './types';
+import { Employee, WorkflowSchema } from './types';
 
 export function useGetEmployeeDetails() {
   const employee = useQuery<Employee>('employees/details', api.get);
@@ -9,7 +9,7 @@ export function useGetEmployeeDetails() {
 }
 
 export function useAssignedGetWorkflowDetails(workflowId: string) {
-  const workflows = useQuery(
+  const workflows = useQuery<WorkflowSchema>(
     `onboarding-workflow/assign/${workflowId}`,
     api.get
   );

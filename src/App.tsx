@@ -21,6 +21,7 @@ import EmployeeAuth from 'modules/general/components/employeeAuth';
 import NoAuthEmployee from 'modules/general/components/noAuth/noAuthEmployee';
 import NotFound from 'pages/not-found';
 import EmployeeWorkflow from 'pages/employee/workflow';
+import EmployeeWorkflowComplete from 'pages/employee/workflow-complete';
 
 function App() {
   return (
@@ -52,6 +53,10 @@ function App() {
         <Route element={<EmployeeAuth />}>
           <Route path="/employee" element={<Employee />} />
           <Route path="/employee/:id" element={<EmployeeWorkflow />} />
+          <Route
+            path="/employee/complete"
+            element={<EmployeeWorkflowComplete />}
+          />
           <Route path="/employee/reset-password" element={<ResetPassword />} />
         </Route>
         <Route path={'/*'} element={<NotFound />} />
