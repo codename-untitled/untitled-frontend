@@ -2,8 +2,10 @@ import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
 import ModalBase from 'modules/company/components/modals/modalBase';
 import { ModalProps } from 'modules/company/components/modals/types';
-import { AddEmployeePayload } from 'modules/company/store/employees';
-import { useAddEmployeeMutation } from 'modules/company/store/employees/mutation';
+import {
+  AddEmployeePayload,
+  useAddEmployeeMutation,
+} from 'modules/company/store/employees';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
 import toast from 'react-hot-toast';
@@ -85,7 +87,7 @@ const AddEmployee = ({ show, setShow, mutate }: AddEmployeeProps) => {
             <div className="flex w-[100%] gap-[30px] mt-[20px] max-md:flex-col">
               <div className="basis-[50%]">
                 <FormField
-                  label="Company email"
+                  label="Email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}

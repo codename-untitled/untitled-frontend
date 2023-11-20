@@ -1,14 +1,20 @@
 import { Formik } from 'formik';
 import { FormikStateContextError } from 'helpers/context-error';
+import Logo from 'modules/general/components/logo';
 import Button from 'modules/general/components/buttons/button';
 import FormField from 'modules/general/components/formComponents/formField';
 import { CompanySignUpPayload } from 'modules/general/store/auth';
 import { useCompanySignupMutation } from 'modules/general/store/auth/mutations';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import { schema } from './validation';
 
 const SignUp = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1024px)',
+  });
+
   const year = new Date().getFullYear();
   const navigate = useNavigate();
 
@@ -26,9 +32,13 @@ const SignUp = () => {
   return (
     <div className="min-h-screen h-[100%] flex max-sm:min-h-full bg-offWhite max-lg:bg-purp">
       <div className="basis-[55%] relative max-lg:basis-[100%]">
-        <h1 className="text-[30px] font-extrabold ml-[10%] pt-5 max-lg:ml-0 max-lg:text-center max-lg:text-white">
-          ONBOARDER
-        </h1>
+        <div className="max-lg:flex max-lg:justify-center">
+          <Logo
+            color={isDesktopOrLaptop ? 'black' : 'white'}
+            className="ml-[10%] mt-5 w-[221px]"
+            onClick={() => navigate('/')}
+          />
+        </div>
         <div className="max-w-[510px] block mx-auto mt-[10vh] z-30 relative max-sm:px-5 max-sm:mt-[15%]">
           <div className="px-[3%] shadow-[1px_1px_0px_0px_#000] pb-4 w-[510px] border-solid border-[0.5px] border-black bg-white rounded-md z-30 max-sm:h-full max-sm:w-full max-sm:pb-6">
             <p className="text-center text-[24px] font-bold mt-[30px]">

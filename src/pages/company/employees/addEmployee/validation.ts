@@ -8,10 +8,16 @@ export const schema = Yup.object().shape({
   phoneNumber: Yup.string()
     .required('phone number is required')
     .min(11, 'phone number is not valid'),
-  role: Yup.string().required('role is required'),
+  role: Yup.string()
+    .required('Role is required')
+    .oneOf(['ADMIN', 'MEMBER'], 'Invalid role. Choose either ADMIN or MEMBER'),
   department: Yup.string().required('department is required'),
   jobTitle: Yup.string().required('job title is required'),
   password: Yup.string()
     .required('Password is required')
-    .min(8, 'Password should contain 8 characters'),
+    .min(8, 'Password should contain 8 characters')
+    .matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+      'password must contain one number and one special character.'
+    ),
 });

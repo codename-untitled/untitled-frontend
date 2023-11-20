@@ -51,7 +51,7 @@ class API {
       headers: this.headers,
     };
 
-    const response = await fetch(url, options);
+    const response = await fetch(this.getURL(url), options);
 
     return API.handleResponse(response, this.RequestError);
   };
