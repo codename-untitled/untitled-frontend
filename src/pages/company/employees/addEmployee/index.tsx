@@ -159,7 +159,7 @@ const AddEmployee = ({ show, setShow, mutate }: AddEmployeeProps) => {
                 <FormField
                   label="Password"
                   name="password"
-                  type="password"
+                  type="text"
                   placeholder="default password"
                   value={values.password}
                   onChange={handleChange}
