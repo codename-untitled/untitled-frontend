@@ -31,15 +31,18 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
   );
   const params = useParams();
   const { setFieldValue } = useFormikContext();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const getStepById = (id: string) => {
+  const getStepById = (id: string, isMutating: boolean) => {
     switch (id) {
       case WorkflowTypes.CHECKLIST:
-        return <Checklist />;
+        return <Checklist isLoading={isMutating} />;
       case WorkflowTypes.UPLOAD_DOCUMENT:
-        return <Upload />;
+        return <Upload isLoading={isMutating} />;
       default:
-        return <Signature workflowSchema={workflowSchema} />;
+        return (
+          <Signature workflowSchema={workflowSchema} isLoading={isMutating} />
+        );
     }
   };
 
@@ -63,13 +66,21 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
           order: `${index + 1}`,
         };
         addStepToWorkflowMutation.mutate(payload);
+        setIsLoading(false);
       }
+    },
+    onError: () => {
+      setIsLoading(false);
     },
   });
 
   const updateStepMutation = useUpdateStepMutation(`${workflowSchema?._id}`, {
     onSuccess: () => {
       toast.success('Saved');
+      setIsLoading(false);
+    },
+    onError: () => {
+      setIsLoading(false);
     },
   });
 
@@ -83,8 +94,10 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
 
       if (workflowSchema) {
         updateStepMutation.mutate(payload);
+        setIsLoading(true);
       } else {
         createChecklistorUplpoadMutation.mutate(payload);
+        setIsLoading(true);
       }
     }
 
@@ -96,8 +109,10 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
 
       if (workflowSchema) {
         updateStepMutation.mutate(payload);
+        setIsLoading(true);
       } else {
         createChecklistorUplpoadMutation.mutate(payload);
+        setIsLoading(true);
       }
     }
 
@@ -106,6 +121,7 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
       formData.append('title', data.title || '');
       formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
+      setIsLoading(true);
 
       createSignature(formData)
         .then((response) => {
@@ -113,10 +129,12 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
             toast.success('Success');
             setFieldValue(`steps.${index}.step`, response.data._id);
             setFieldValue(`steps.${index}.order`, index + 1);
+            setIsLoading(false);
           }
         })
         .catch((err) => {
           toast.error(err.response.data.error);
+          setIsLoading(false);
         });
     }
   };
@@ -182,7 +200,7 @@ const EditWorkflowField = ({ index, workflowSchema }: Props) => {
                   </div>
                 </div>
                 <hr className="my-10" />
-                <div className="w-full">{getStepById(selectId)}</div>
+                <div className="w-full">{getStepById(selectId, isLoading)}</div>
               </div>
             </form>
           )}

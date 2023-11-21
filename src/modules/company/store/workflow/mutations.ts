@@ -38,6 +38,16 @@ export const useUpdateStepMutation = (
     onError: options.onError,
   });
 
+export const useUpdateAssignedStepMutation = (
+  stepId: string,
+  options: MutationOptions<undefined>
+) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useMutation<any, undefined>(`onboarding-step/assign/${stepId}`, api.put, {
+    onSuccess: options.onSuccess,
+    onError: options.onError,
+  });
+
 export const useAddStepToWorkflowMutation = (
   workflowId: string,
   options: MutationOptions<undefined>

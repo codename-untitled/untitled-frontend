@@ -7,7 +7,7 @@ import {
   StepSchema,
   useAddStepToAssignedWorkflowMutation,
   useCreateChecklistOrUploadMutation,
-  useUpdateStepMutation,
+  useUpdateAssignedStepMutation,
   WorkflowTypes,
 } from 'modules/company/store/workflow';
 import { createSignature } from 'modules/company/store/workflow/customMutation';
@@ -32,15 +32,16 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
   );
   const params = useParams();
   const { setFieldValue } = useFormikContext();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const getStepById = (id: string) => {
+  const getStepById = (id: string, isMutating: boolean) => {
     switch (id) {
       case WorkflowTypes.CHECKLIST:
-        return <Checklist />;
+        return <Checklist isLoading={isMutating} />;
       case WorkflowTypes.UPLOAD_DOCUMENT:
-        return <Upload />;
+        return <Upload isLoading={isMutating} />;
       default:
-        return <Signature />;
+        return <Signature isLoading={isMutating} />;
     }
   };
 
@@ -64,15 +65,26 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
           order: `${index + 1}`,
         };
         addStepToWorkflowMutation.mutate(payload);
+        setIsLoading(false);
       }
+    },
+    onError: () => {
+      setIsLoading(false);
     },
   });
 
-  const updateStepMutation = useUpdateStepMutation(`${workflowSchema?._id}`, {
-    onSuccess: () => {
-      toast.success('Saved');
-    },
-  });
+  const updateStepMutation = useUpdateAssignedStepMutation(
+    `${workflowSchema?._id}`,
+    {
+      onSuccess: () => {
+        toast.success('Saved');
+        setIsLoading(false);
+      },
+      onError: () => {
+        setIsLoading(false);
+      },
+    }
+  );
 
   const onSubmit = (data: any) => {
     if (selectId === WorkflowTypes.CHECKLIST) {
@@ -82,8 +94,10 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
       };
 
       if (workflowSchema) {
+        setIsLoading(true);
         updateStepMutation.mutate(payload);
       } else {
+        setIsLoading(true);
         createChecklistorUplpoadMutation.mutate(payload);
       }
     }
@@ -95,8 +109,10 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
       };
 
       if (workflowSchema) {
+        setIsLoading(true);
         updateStepMutation.mutate(payload);
       } else {
+        setIsLoading(true);
         createChecklistorUplpoadMutation.mutate(payload);
       }
     }
@@ -106,6 +122,7 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
       formData.append('title', data.title || '');
       formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
+      setIsLoading(true);
 
       createSignature(formData)
         .then((response) => {
@@ -117,10 +134,12 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
               order: `${index + 1}`,
             };
 
+            setIsLoading(false);
             addStepToWorkflowMutation.mutate(payload);
           }
         })
         .catch((err) => {
+          setIsLoading(false);
           toast.error(err.response.data.error);
         });
     }
@@ -187,7 +206,7 @@ const PersonalizeWorkflowField = ({ index, workflowSchema }: Props) => {
                   </div>
                 </div>
                 <hr className="my-10" />
-                <div className="w-full">{getStepById(selectId)}</div>
+                <div className="w-full">{getStepById(selectId, isLoading)}</div>
               </div>
             </form>
           )}

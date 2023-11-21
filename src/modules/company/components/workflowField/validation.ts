@@ -42,9 +42,9 @@ export const uploadSchema = Yup.object().shape({
   overview: Yup.string()
     .required('overview is required')
     .min(7, 'overview must be at least 7 characters'),
-  document: Yup.array(
+  documents: Yup.array(
     Yup.object({
-      name: Yup.string().required('label is required'),
+      name: Yup.string().required('name is required'),
     })
   ),
 });

@@ -11,9 +11,10 @@ type ParentValue = {
 
 type Props = {
   workflowSchema?: any;
+  isLoading?: boolean;
 };
 
-const Signature = ({ workflowSchema }: Props) => {
+const Signature = ({ workflowSchema, isLoading }: Props) => {
   const [fileName, setFileName] = useState(
     workflowSchema?.data?.documents[0]?.name ?? 'Choose a file'
   );
@@ -54,7 +55,12 @@ const Signature = ({ workflowSchema }: Props) => {
       )}
       <p className="flex justify-end text-[12px] mt-1">Max size 5mb</p>
       <div>
-        <Button label="Create" color="green" onClick={handleSubmit} />
+        <Button
+          label="Create"
+          color="green"
+          isLoading={isLoading}
+          onClick={handleSubmit}
+        />
       </div>
     </div>
   );

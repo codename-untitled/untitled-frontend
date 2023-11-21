@@ -16,13 +16,17 @@ type ParentValue = {
   documents: Document[];
 };
 
-const Upload = () => {
+type Props = {
+  isLoading?: boolean;
+};
+
+const Upload = ({ isLoading }: Props) => {
   const location = useLocation();
   const { touched, values, handleChange, errors, handleBlur, handleSubmit } =
     useFormikContext<ParentValue>();
 
   const documentValues = {
-    label: '',
+    name: '',
   };
 
   return (
@@ -68,7 +72,12 @@ const Upload = () => {
                 size="md"
                 onClick={() => push(documentValues)}
               />
-              <Button label="Create" color="green" onClick={handleSubmit} />
+              <Button
+                label="Create"
+                color="green"
+                isLoading={isLoading}
+                onClick={handleSubmit}
+              />
             </div>
           </div>
         )}

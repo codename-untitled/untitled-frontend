@@ -63,6 +63,7 @@ export const getInitialValue = (workflowType: string, workflowSchema: any) => {
       return signatureValues(workflowSchema);
   }
 };
+
 const newUploadValues = {
   title: '',
   overview: '',

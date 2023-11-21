@@ -25,17 +25,18 @@ const WorkflowField = ({ index }: Props) => {
   const [selectId, setSelectId] = useState<WorkflowTypes>(
     WorkflowTypes.CHECKLIST
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setFieldValue } = useFormikContext();
 
-  const getStepById = (id: string) => {
+  const getStepById = (id: string, isMutating: boolean) => {
     switch (id) {
       case WorkflowTypes.CHECKLIST:
-        return <Checklist />;
+        return <Checklist isLoading={isMutating} />;
       case WorkflowTypes.UPLOAD_DOCUMENT:
-        return <Upload />;
+        return <Upload isLoading={isMutating} />;
       default:
-        return <Signature />;
+        return <Signature isLoading={isMutating} />;
     }
   };
 
@@ -44,6 +45,10 @@ const WorkflowField = ({ index }: Props) => {
       toast.success('Saved');
       setFieldValue(`steps.${index}.step`, response._id);
       setFieldValue(`steps.${index}.order`, index + 1);
+      setIsLoading(false);
+    },
+    onError: () => {
+      setIsLoading(false);
     },
   });
 
@@ -54,6 +59,7 @@ const WorkflowField = ({ index }: Props) => {
         data,
       };
       createChecklistOrUploadmutation.mutate(payload);
+      setIsLoading(true);
     }
 
     if (selectId === WorkflowTypes.UPLOAD_DOCUMENT) {
@@ -62,6 +68,7 @@ const WorkflowField = ({ index }: Props) => {
         data,
       };
       createChecklistOrUploadmutation.mutate(payload);
+      setIsLoading(true);
     }
 
     if (selectId === WorkflowTypes.SIGN_DOCUMENT) {
@@ -69,6 +76,7 @@ const WorkflowField = ({ index }: Props) => {
       formData.append('title', data.title || '');
       formData.append('overview', data.overview || '');
       formData.append('docs', data.docs);
+      setIsLoading(true);
 
       createSignature(formData)
         .then((response) => {
@@ -76,10 +84,12 @@ const WorkflowField = ({ index }: Props) => {
             toast.success('Success');
             setFieldValue(`steps.${index}.step`, response.data._id);
             setFieldValue(`steps.${index}.order`, index + 1);
+            setIsLoading(false);
           }
         })
         .catch((err) => {
           toast.error(err.response.data.error);
+          setIsLoading(false);
         });
     }
   };
@@ -133,7 +143,7 @@ const WorkflowField = ({ index }: Props) => {
                   </div>
                 </div>
                 <hr className="my-10" />
-                <div className="w-full">{getStepById(selectId)}</div>
+                <div className="w-full">{getStepById(selectId, isLoading)}</div>
               </div>
             </form>
           )}

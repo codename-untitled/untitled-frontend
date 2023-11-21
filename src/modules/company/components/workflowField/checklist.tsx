@@ -16,7 +16,11 @@ type ParentValue = {
   items: Items[];
 };
 
-const Checklist = () => {
+type Props = {
+  isLoading?: boolean;
+};
+
+const Checklist = ({ isLoading }: Props) => {
   const location = useLocation();
   const { touched, values, handleChange, errors, handleBlur, handleSubmit } =
     useFormikContext<ParentValue>();
@@ -70,7 +74,12 @@ const Checklist = () => {
                   size="md"
                   onClick={() => push(checklistValues)}
                 />
-                <Button label="Create" color="green" onClick={handleSubmit} />
+                <Button
+                  label="Create"
+                  color="green"
+                  isLoading={isLoading}
+                  onClick={handleSubmit}
+                />
               </div>
             </div>
           )}
