@@ -11,7 +11,7 @@ import PersonalizeModal from 'modules/company/components/modals/personalizeModal
 
 const Workflow = () => {
   const navigate = useNavigate();
-  const { data: templates, isLoading } = useGetWorkflows();
+  const { data: templates, isLoading, mutate } = useGetWorkflows();
 
   if (isLoading) {
     return (
@@ -25,7 +25,7 @@ const Workflow = () => {
 
   return (
     <div className="mx-[5%]">
-      <DeleteModal />
+      <DeleteModal mutate={mutate} />
       <AssignWorkflowModal />
       <PersonalizeModal />
       <div className="flex justify-between mt-[30px]">

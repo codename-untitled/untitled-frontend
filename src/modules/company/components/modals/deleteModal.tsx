@@ -4,7 +4,11 @@ import { useDeleteWorkflowMutation } from 'modules/company/store/workflow';
 import toast from 'react-hot-toast';
 import { deleteWorkflowAtom } from 'modules/company/store/workflow/states';
 
-const DeleteModal = () => {
+type Props = {
+  mutate: () => void;
+};
+
+const DeleteModal = ({ mutate }: Props) => {
   const [deleteState, setDeleteState] = useAtom(deleteWorkflowAtom);
 
   const deleteMutation = useDeleteWorkflowMutation(
@@ -17,6 +21,7 @@ const DeleteModal = () => {
           workflowId: '',
           fileName: '',
         });
+        mutate();
       },
     }
   );
