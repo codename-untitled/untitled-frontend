@@ -82,6 +82,8 @@ const AssignWorkflowModal = () => {
                 setAssignWorkflowState({
                   showModal: false,
                 });
+                setSearchTerm('');
+                setShowDropDown(false);
               }}
             >
               <img src={require('assets/x-cancel.svg').default} alt="cancel" />
