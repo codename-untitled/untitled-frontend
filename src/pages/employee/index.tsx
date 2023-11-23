@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import Footer from 'modules/general/components/footer';
+import NoWorkflow from 'modules/employee/components/noWorkflow';
 import Welcome from 'modules/employee/components/welcome';
 import { useGetEmployeeDetails } from 'modules/employee/store';
 import Logo from 'modules/general/components/logo';
@@ -14,11 +15,15 @@ const Employee = () => {
         <Logo color="black" />
       </h1>
       <div className="px-[10%] py-[6.5%]">
-        <Welcome
-          firstName={employee.firstName}
-          workflowAssigned={employee.assignedWorkflow}
-          isLoading={isLoading}
-        />
+        {employee?.assignedWorkflow?.length === 0 && !isLoading ? (
+          <NoWorkflow />
+        ) : (
+          <Welcome
+            firstName={employee.firstName}
+            workflowAssigned={employee.assignedWorkflow}
+            isLoading={isLoading}
+          />
+        )}
       </div>
       <Footer />
     </div>
