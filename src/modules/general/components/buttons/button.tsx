@@ -30,7 +30,7 @@ function Button({
     <button
       onClick={onClick}
       className={`rounded-md shadow-[1px_1px_0px_0px_#000] border-solid border border-black ${
-        color === 'purple' && 'bg-chartPurple text-white'
+        color === 'purple' && 'bg-chartPurple text-white hover:bg-[#ac44bc]'
       } 
       ${color === 'black' && 'bg-black text-white'}
       ${color === 'green' && 'bg-green text-white'}

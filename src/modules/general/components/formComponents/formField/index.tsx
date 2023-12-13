@@ -26,6 +26,7 @@ function FormField({
       </label>
       <input
         {...rest}
+        disabled={disabled}
         className={`shadow-[1px_1px_0px_0px_#000]  border-solid border-[0.5px] border-black bg-white rounded-md pl-2 text-[14px]
         focus:outline-chartPurple focus:border-none
         ${inputSize === 'sm' && 'h-[32px]'}
