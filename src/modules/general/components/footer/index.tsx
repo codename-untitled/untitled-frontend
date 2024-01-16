@@ -4,7 +4,7 @@ const Footer = () => (
       <p>Terms of service</p>
       <p>Privacy policy</p>
     </div>
-    <p className="before:content-['©'] before:mr-1">onboarder, 2023</p>
+    <p className="before:content-['©'] before:mr-1">onboarder, 2024</p>
     <div className="flex items-center gap-x-3 md:gap-x-6">
       <p>Twitter</p>
       <p>LinkedIn</p>
